@@ -1,0 +1,10 @@
+[user]
+	name = James Brock
+	email = jamesbrock@gmail.com
+
+[merge]
+        conflictstyle = diff3
+[push]
+	default = current
+[core]
+	editor = vim
