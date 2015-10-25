@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+firefox https://www.haskell.org/hoogle/?hoogle=$1 2> /dev/null

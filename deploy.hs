@@ -23,9 +23,9 @@ main = do
             putStrLn $ "Link " ++ inPath ++ " " ++ outAbs
             checkFile inPath outAbs
             createSymbolicLink inPath outAbs
-            
+
     shakeArgs shakeOptions $ do
-    
+
     phony "all" $
         need $ (home </>) <$> [".vimrc", ".gvimrc", ".bashrc", ".ghci", ".gitconfig"]
 

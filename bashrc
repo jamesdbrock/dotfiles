@@ -8,7 +8,6 @@ lll() {
 }
 
 ack() {
-    # ack-grep -k --color --heading --break $1 $2 $3 $4 $5 $6 $7 $8 $9 | less -r
     ack-grep -k --color --heading --break --pager="less -F -r" $1 $2 $3 $4 $5 $6 $7 $8 $9
 }
 
