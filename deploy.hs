@@ -1,4 +1,5 @@
-#! /usr/bin/env runhaskell
+#! /usr/bin/env stack
+-- stack --verbosity warn --system-ghc runghc --package shake
 -- vim: set filetype=haskell :
 
 import Development.Shake hiding (doesFileExist)
@@ -12,6 +13,7 @@ import System.Environment
 
 main :: IO ()
 main = do
+
     home <- liftIO getHomeDirectory
     progName <- getProgName
     progNamePath <- makeAbsolute progName

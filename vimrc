@@ -249,7 +249,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " http://www.stephendiehl.com/posts/vim_haskell.html
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> <F2> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
+au FileType haskell nnoremap <buffer> <silent> <F4> :HdevtoolsInfo<CR>
 
