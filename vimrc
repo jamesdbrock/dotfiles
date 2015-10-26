@@ -2,24 +2,27 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" https://github.com/tpope/vim-pathogen
-execute pathogen#infect()
+" " https://github.com/tpope/vim-pathogen
+" execute pathogen#infect()
 
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
-filetype plugin indent on
+" filetype plugin indent on
+
+" https://github.com/begriffs/haskell-vim-now
 
 " https://github.com/gmarik/Vundle.vim#about
 " set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-" Plugin 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim'
 
 " " The following are examples of different formats supported.
 " " Keep Plugin commands between vundle#begin/end.
@@ -39,9 +42,43 @@ filetype plugin indent on
 
 " Plugin 'Valloric/YouCompleteMe'
 
+" Support bundles
+" Plugin 'jgdavey/tslime.vim'
+" Plugin 'Shougo/vimproc.vim'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+" Plugin 'moll/vim-bbye'
+" Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'vim-scripts/gitignore'
+
+" Colorscheme
+Plugin 'vim-scripts/wombat256.vim'
+
+" Bars, panels, and files
+Plugin 'scrooloose/nerdtree'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+
+" Text manipulation
+Plugin 'godlygeek/tabular'
+
+" Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'int3/vim-extradite'
+
+" Haskell
+" Plugin 'neovimhaskell/haskell-vim'
+" Plugin 'enomsg/vim-haskellConcealPlus'
+" Plugin 'eagletmt/ghcmod-vim'
+" Plugin 'eagletmt/neco-ghc'
+" Plugin 'Twinside/vim-hoogle'
+
+" Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
+
 " All of your Plugins must be added before the following line
-" call vundle#end()            " required
-" filetype plugin indent on    " required
+call vundle#end()            " required
+filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -64,65 +101,91 @@ set number
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-set shell=bash\ -i " http://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
+" http://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
+set shell=bash\ -i
 
-syntax enable
-set background=dark " tell vim what color the background is.
-highlight Normal guifg=white guibg=black
-" colorscheme solarized
+" set background=dark " tell vim what color the background is.
+" highlight Normal guifg=white guibg=black
+" " colorscheme solarized
 
 
 noremap ; :
 noremap : ;
 
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = " "
+let g:mapleader = " "
+
+" Leader key timeout
+set tm=2000
+
 " http://vim.wikia.com/wiki/Easy_edit_of_files_in_the_same_directory
 cabbr <expr> %% expand('%:p:h')
 
+" Find custom built ghc-mod, codex etc
+let $PATH = $PATH . ':' . expand("~/.local/bin")
+
+
+
+" Show trailing whitespace
+set list
+" But only interesting whitespace
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+
+
 " http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
 
-" {{{ $VIMRUNTIME/vimrc_example.vim
-
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2014 Feb 05
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
+" if v:progname =~? "evim"
+"   finish
+" endif
 
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
 
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file (restore to previous version)
-  set undofile		" keep an undo file (undo changes after closing)
-endif
-set history=50		" keep 50 lines of command line history
+" Set to auto read when a file is changed from the outside
+set autoread
+set backup		" keep a backup file (restore to previous version)
+set undofile		" keep an undo file (undo changes after closing)
+set history=100		" keep 100 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+set autoindent		" always set autoindenting on
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
+" No annoying sound on errors
+set noerrorbells
+set vb t_vb=
 
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
+
+
+" Remap `Q` to play the macro stored in the 'q' register. This way you can
+" record a throw-away macro with `qq` and play it with `Q`. Also, nobody ever
+" uses ex-mode.
+nnoremap Q @q
+
+" for Shift-K
+" set keywordprg=pophoogle
+autocmd FileType haskell setlocal keywordprg=pophoogle
+
 inoremap jk <Esc>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
@@ -136,6 +199,7 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
+
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -160,10 +224,6 @@ if has("autocmd")
 
   augroup END
 
-else
-
-  set autoindent		" always set autoindenting on
-
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
@@ -173,7 +233,6 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
-" }}}
 
 
 
@@ -226,17 +285,240 @@ set scrolloff=5 " scroll if cursor is within 5 lines of edge
 set ignorecase " case-insensitive search
 set smartcase " case-sensitive when exists uppercase
 
-" search up for tags file.
+" search up directories for tags file.
 set tags=tags;
 
+try
+  colorscheme wombat256mod
+catch
+endtry
+
+
+" Enable syntax highlighting
+syntax enable
+
+" Adjust signscolumn and syntastic to match wombat
+hi! link SignColumn LineNr
+hi! link SyntasticErrorSign ErrorMsg
+hi! link SyntasticWarningSign WarningMsg
+
+" Use pleasant but very visible search hilighting
+hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
+hi! link Visual Search
+
+" Enable filetype plugins
+" filetype plugin on
+" filetype indent on
+
+" Match wombat colors in nerd tree
+hi Directory guifg=#8ac6f2
+
+" Searing red very visible cursor
+hi Cursor guibg=red
+
+" " Use same color behind concealed unicode characters
+" hi clear Conceal
+
+" Don't blink normal mode cursor
+set guicursor=n-v-c:block-Cursor
+set guicursor+=n-v-c:blinkon0
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+  set guioptions-=T
+  set guioptions-=e
+  set guitablabel=%M\ %t
+endif
+set t_Co=256
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
 " http://vim.wikia.com/wiki/Easier_buffer_switching
-:nnoremap <F5> :buffers<CR>:buffer<Space>
+" :nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " https://github.com/mileszs/ack.vim
-:nnoremap <F6> :Ack<CR>
+" :nnoremap <F6> :Ack<CR>
 
 " http://stackoverflow.com/questions/2404879/in-vim-how-can-i-have-a-permenant-status-line-showing-me-the-name-of-the-curren
 set laststatus=2
+
+
+" Open file prompt with current path
+nnoremap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+
+" Show undo tree
+" nmap <silent> <leader>u :GundoToggle<CR>
+
+" Fuzzy find files
+nnoremap <silent> <Leader><space> :CtrlP<CR>
+let g:ctrlp_max_files=0
+let g:ctrlp_show_hidden=1
+let g:ctrlp_custom_ignore = { 'dir': '\v[\/](.git|.cabal-sandbox)$' }
+
+" Copy and paste to os clipboard
+nmap <leader>y "*y
+vmap <leader>y "*y
+nmap <leader>d "*d
+vmap <leader>d "*d
+nmap <leader>p "*p
+vmap <leader>p "*p
+
+
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f', '')<CR>
+
+
+" Treat long lines as break lines (useful when moving around in them)
+nnoremap j gj
+nnoremap k gk
+
+noremap <c-h> <c-w>h
+noremap <c-k> <c-w>k
+noremap <c-j> <c-w>j
+noremap <c-l> <c-w>l
+
+" Disable highlight when <leader><cr> is pressed
+" but preserve cursor coloring
+" nnoremap <leader><cr> :noh\|hi Cursor guibg=red<cr>
+nnoremap <leader><cr> :noh<cr>
+augroup haskell
+  autocmd!
+  autocmd FileType haskell map <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup END
+
+" Delete trailing white space on save
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+augroup whitespace
+  autocmd!
+  autocmd BufWrite *.hs :call DeleteTrailingWS()
+augroup END
+
+
+function! CmdLine(str)
+  exe "menu Foo.Bar :" . a:str
+  emenu Foo.Bar
+  unmenu Foo
+endfunction 
+
+function! VisualSelection(direction, extra_filter) range
+  let l:saved_reg = @"
+  execute "normal! vgvy"
+
+  let l:pattern = escape(@", '\\/.*$^~[]')
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+  if a:direction == 'b'
+    execute "normal ?" . l:pattern . "^M"
+  elseif a:direction == 'gv'
+    call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.' . a:extra_filter)
+  elseif a:direction == 'replace'
+    call CmdLine("%s" . '/'. l:pattern . '/')
+  elseif a:direction == 'f'
+    execute "normal /" . l:pattern . "^M"
+  endif
+
+  let @/ = l:pattern
+  let @" = l:saved_reg
+endfunction
+
+
+" NERDTree
+
+" Close nerdtree after a file is selected
+let NERDTreeQuitOnOpen = 1
+
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+function! ToggleFindNerd()
+  if IsNERDTreeOpen()
+    exec ':NERDTreeToggle'
+  else
+    exec ':NERDTreeFind'
+  endif
+endfunction
+
+" If nerd tree is closed, find current file, if open, close it
+nmap <silent> <leader>f <ESC>:call ToggleFindNerd()<CR>
+nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
+
+
+" Enable some tabular presets for Haskell
+let g:haskell_tabular = 1
+
+
+" Tags
+
+" set tags=tags;/,codex.tags;/
+" 
+" let g:tagbar_type_haskell = {
+"     \ 'ctagsbin'  : 'hasktags',
+"     \ 'ctagsargs' : '-x -c -o-',
+"     \ 'kinds'     : [
+"         \  'm:modules:0:1',
+"         \  'd:data: 0:1',
+"         \  'd_gadt: data gadt:0:1',
+"         \  't:type names:0:1',
+"         \  'nt:new types:0:1',
+"         \  'c:classes:0:1',
+"         \  'cons:constructors:1:1',
+"         \  'c_gadt:constructor gadt:1:1',
+"         \  'c_a:constructor accessors:1:1',
+"         \  'ft:function types:1:1',
+"         \  'fi:function implementations:0:1',
+"         \  'o:others:0:1'
+"     \ ],
+"     \ 'sro'        : '.',
+"     \ 'kind2scope' : {
+"         \ 'm' : 'module',
+"         \ 'c' : 'class',
+"         \ 'd' : 'data',
+"         \ 't' : 'type'
+"     \ },
+"     \ 'scope2kind' : {
+"         \ 'module' : 'm',
+"         \ 'class'  : 'c',
+"         \ 'data'   : 'd',
+"         \ 'type'   : 't'
+"     \ }
+" \ }
+
+" " Generate haskell tags with codex and hscope
+" map <leader>tg :!codex update --force<CR>:call system("git-hscope -X TemplateHaskell")<CR><CR>:call LoadHscope()<CR>
+" 
+" map <leader>tt :TagbarToggle<CR>
+" 
+" set csprg=~/.local/bin/hscope
+" set csto=1 " search codex tags first
+" set cst
+" set csverb
+" nnoremap <silent> <C-\> :cs find c <C-R>=expand("<cword>")<CR><CR>
+" " Automatically make cscope connections
+" function! LoadHscope()
+"   let db = findfile("hscope.out", ".;")
+"   if (!empty(db))
+"     let path = strpart(db, 0, match(db, "/hscope.out$"))
+"     set nocscopeverbose " suppress 'duplicate connection' error
+"     exe "cs add " . db . " " . path
+"     set cscopeverbose
+"   endif
+" endfunction
+" au BufEnter /*.hs call LoadHscope()
+" 
+" "
+
 
 " https://github.com/scrooloose/syntastic#3-recommended-settings
 set statusline+=%#warningmsg#
@@ -244,12 +526,23 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
+" To always show the errors list when editing we can set the following flag
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+" let g:syntastic_haskell_checkers = ['ghc_mod', 'hdevtools', 'hlint']
+
+" Haskell Lint
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
+" let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
+nnoremap <leader>sm :SyntasticToggleMode<CR>
+nnoremap <leader>sl :SyntasticCheck hlint<CR>
+nnoremap <leader>sc :SyntasticCheck<CR>
+nnoremap <leader>sr :SyntasticReset<CR>
 
 " http://www.stephendiehl.com/posts/vim_haskell.html
 au FileType haskell nnoremap <buffer> <F2> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F4> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> <F3> :HdevtoolsClear<CR>
+au FileType haskell nnoremap <buffer> <F4> :HdevtoolsInfo<CR>
 
