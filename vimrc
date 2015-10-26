@@ -74,6 +74,8 @@ Plugin 'int3/vim-extradite'
 " Plugin 'eagletmt/neco-ghc'
 " Plugin 'Twinside/vim-hoogle'
 
+" Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -99,7 +101,8 @@ set number
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-set shell=bash\ -i " http://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
+" http://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
+set shell=bash\ -i
 
 " set background=dark " tell vim what color the background is.
 " highlight Normal guifg=white guibg=black
@@ -112,7 +115,7 @@ noremap : ;
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = " "
-" let g:mapleader = " "
+let g:mapleader = " "
 
 " Leader key timeout
 set tm=2000
@@ -177,7 +180,7 @@ endif
 " Remap `Q` to play the macro stored in the 'q' register. This way you can
 " record a throw-away macro with `qq` and play it with `Q`. Also, nobody ever
 " uses ex-mode.
-nmap Q @q
+nnoremap Q @q
 
 " for Shift-K
 " set keywordprg=pophoogle
@@ -304,8 +307,8 @@ hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=n
 hi! link Visual Search
 
 " Enable filetype plugins
-filetype plugin on
-filetype indent on
+" filetype plugin on
+" filetype indent on
 
 " Match wombat colors in nerd tree
 hi Directory guifg=#8ac6f2
@@ -313,8 +316,8 @@ hi Directory guifg=#8ac6f2
 " Searing red very visible cursor
 hi Cursor guibg=red
 
-" Use same color behind concealed unicode characters
-hi clear Conceal
+" " Use same color behind concealed unicode characters
+" hi clear Conceal
 
 " Don't blink normal mode cursor
 set guicursor=n-v-c:block-Cursor
@@ -345,7 +348,7 @@ set laststatus=2
 
 
 " Open file prompt with current path
-nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+nnoremap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 
 " Show undo tree
 " nmap <silent> <leader>u :GundoToggle<CR>
@@ -381,10 +384,11 @@ noremap <c-l> <c-w>l
 
 " Disable highlight when <leader><cr> is pressed
 " but preserve cursor coloring
-nmap <silent> <leader><cr> :noh\|hi Cursor guibg=red<cr>
+" nnoremap <leader><cr> :noh\|hi Cursor guibg=red<cr>
+nnoremap <leader><cr> :noh<cr>
 augroup haskell
   autocmd!
-  autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
+  autocmd FileType haskell map <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 
@@ -522,12 +526,23 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
+" To always show the errors list when editing we can set the following flag
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+" let g:syntastic_haskell_checkers = ['ghc_mod', 'hdevtools', 'hlint']
+
+" Haskell Lint
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
+" let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
+nnoremap <leader>sm :SyntasticToggleMode<CR>
+nnoremap <leader>sl :SyntasticCheck hlint<CR>
+nnoremap <leader>sc :SyntasticCheck<CR>
+nnoremap <leader>sr :SyntasticReset<CR>
 
 " http://www.stephendiehl.com/posts/vim_haskell.html
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> <F2> :HdevtoolsClear<CR>
+au FileType haskell nnoremap <buffer> <F3> :HdevtoolsInfo<CR>
 

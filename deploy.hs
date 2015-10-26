@@ -15,7 +15,7 @@ main = do
     home <- liftIO getHomeDirectory
     progName <- getProgName
     progNamePath <- makeAbsolute progName
-    let exPath = takeDirectory progNamePath -- this doesn't work.
+    let exPath = takeDirectory progNamePath -- this doesn't work outside the dotfiles directory for runghc.
 
     let lnFile out = do
             let inPath = exPath </> dropWhile ('.'==) (takeFileName out)
@@ -27,7 +27,14 @@ main = do
     shakeArgs shakeOptions $ do
 
     phony "all" $
-        need $ (home </>) <$> [".vimrc", ".gvimrc", ".bashrc", ".ghci", ".gitconfig"]
+        need $ (home </>) <$>
+            [ ".vimrc"
+            , ".gvimrc"
+            , ".bashrc"
+            , ".ghci"
+            , ".gitconfig"
+            , ".local/bin/pophoogle"
+            ]
 
     (home </>) <$> [".bashrc", ".vimrc", ".gvimrc"] |%> \ out -> do
         alwaysRerun
@@ -37,6 +44,9 @@ main = do
 
     (home </>) <$> [".gitconfig", ".ghci"] |%> \ out ->
         liftIO $ lnFile out
+
+    (home </>) <$> [".local/bin/pophoogle"] |%> \ out ->
+        liftIO $ (lnFile out)
 
     where
 
