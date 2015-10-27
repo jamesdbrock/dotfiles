@@ -28,17 +28,35 @@ main = do
 
     shakeArgs shakeOptions $ do
 
-    phony "all" $
-        need $ (home </>) <$>
-            [ ".vimrc"
-            , ".gvimrc"
-            , ".bashrc"
-            , ".ghci"
-            , ".gitconfig"
-            , ".local/bin/pophoogle"
-            ]
+    want $ (home </>) <$>
+        [ ".vimrc"
+        , ".gvimrc"
+        , ".bashrc"
+        , ".ghci"
+        , ".gitconfig"
+        , ".local/bin/pophoogle"
+        ]
 
-    (home </>) <$> [".bashrc", ".vimrc", ".gvimrc"] |%> \ out -> do
+    -- (home </>) <$> [".bashrc", ".vimrc", ".gvimrc"] |%> \ out -> do
+    --     alwaysRerun
+    --     putNormal $ "Append to " ++ out
+    --     localPath <- liftIO $ makeAbsolute $ dropWhile ('.'==) $ takeFileName out
+    --     liftIO $ appendFile out $ "\nsource " ++ localPath ++ "\n"
+
+    home </> ".bashrc" %> \ out -> do
+        alwaysRerun
+        putNormal $ "Append to " ++ out
+        localPath <- liftIO $ makeAbsolute "bashrc"
+        liftIO $ appendFile out $ "\nsource " ++ localPath ++ "\n"
+
+    home </> ".vimrc" %> \ out -> do
+        alwaysRerun
+        currentVimrc <- readFile out
+        putNormal $ "Append to " ++ out
+        localPath <- liftIO $ makeAbsolute $ dropWhile ('.'==) $ takeFileName out
+        liftIO $ appendFile out $ "\nsource " ++ localPath ++ "\n"
+
+    home </> ".gvimrc" %> \ out -> do
         alwaysRerun
         putNormal $ "Append to " ++ out
         localPath <- liftIO $ makeAbsolute $ dropWhile ('.'==) $ takeFileName out
@@ -47,8 +65,12 @@ main = do
     (home </>) <$> [".gitconfig", ".ghci"] |%> \ out ->
         liftIO $ lnFile out
 
-    (home </>) <$> [".local/bin/pophoogle"] |%> \ out ->
-        liftIO $ (lnFile out)
+    home </> ".local/bin/pophoogle" %> \ out ->
+        liftIO $ lnFile out
+
+-- vim +PluginInstall +qall
+-- stack install hdevtools
+-- stack install hlint
 
     where
 
