@@ -44,7 +44,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " Support bundles
 " Plugin 'jgdavey/tslime.vim'
-" Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimproc.vim'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
 " Plugin 'moll/vim-bbye'
@@ -70,11 +70,11 @@ Plugin 'int3/vim-extradite'
 " Haskell
 " Plugin 'neovimhaskell/haskell-vim'
 " Plugin 'enomsg/vim-haskellConcealPlus'
-" Plugin 'eagletmt/ghcmod-vim'
+Plugin 'eagletmt/ghcmod-vim'
 " Plugin 'eagletmt/neco-ghc'
 " Plugin 'Twinside/vim-hoogle'
 
-" Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
+Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -388,8 +388,8 @@ noremap <c-l> <c-w>l
 nnoremap <leader><cr> :noh<cr>
 augroup haskell
   autocmd!
-  autocmd FileType haskell map <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:SyntasticReset<cr>:GhcModTypeClear<cr>:HdevtoolsClear<cr>
+"  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 
 " Delete trailing white space on save
@@ -409,7 +409,7 @@ function! CmdLine(str)
   exe "menu Foo.Bar :" . a:str
   emenu Foo.Bar
   unmenu Foo
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
   let l:saved_reg = @"
@@ -462,7 +462,7 @@ let g:haskell_tabular = 1
 " Tags
 
 " set tags=tags;/,codex.tags;/
-" 
+"
 " let g:tagbar_type_haskell = {
 "     \ 'ctagsbin'  : 'hasktags',
 "     \ 'ctagsargs' : '-x -c -o-',
@@ -497,9 +497,9 @@ let g:haskell_tabular = 1
 
 " " Generate haskell tags with codex and hscope
 " map <leader>tg :!codex update --force<CR>:call system("git-hscope -X TemplateHaskell")<CR><CR>:call LoadHscope()<CR>
-" 
+"
 " map <leader>tt :TagbarToggle<CR>
-" 
+"
 " set csprg=~/.local/bin/hscope
 " set csto=1 " search codex tags first
 " set cst
@@ -516,7 +516,7 @@ let g:haskell_tabular = 1
 "   endif
 " endfunction
 " au BufEnter /*.hs call LoadHscope()
-" 
+"
 " "
 
 
@@ -531,11 +531,12 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-" let g:syntastic_haskell_checkers = ['ghc_mod', 'hdevtools', 'hlint']
+let g:syntastic_haskell_checkers = ['ghc_mod', 'hdevtools', 'hlint']
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
 " Haskell Lint
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
-" let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
+let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
 nnoremap <leader>sm :SyntasticToggleMode<CR>
 nnoremap <leader>sl :SyntasticCheck hlint<CR>
 nnoremap <leader>sc :SyntasticCheck<CR>
@@ -546,3 +547,13 @@ au FileType haskell nnoremap <buffer> <F2> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <F3> :HdevtoolsClear<CR>
 au FileType haskell nnoremap <buffer> <F4> :HdevtoolsInfo<CR>
 
+
+" Show types in completion suggestions
+" let g:necoghc_enable_detailed_browse = 1
+
+" Type of expression under cursor
+nnoremap <silent> <leader>ht :GhcModType<CR>
+" Insert type of expression under cursor
+nnoremap <silent> <leader>hT :GhcModTypeInsert<CR>
+" GHC errors and warnings
+nnoremap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
