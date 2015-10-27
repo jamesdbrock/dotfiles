@@ -46,7 +46,7 @@ main = do
         liftIO $ lnFile out
 
     (home </>) <$> [".local/bin/pophoogle"] |%> \ out ->
-        liftIO $ (lnFile out)
+        liftIO $ lnFile out
 
     where
 
