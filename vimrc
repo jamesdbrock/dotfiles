@@ -377,18 +377,20 @@ vnoremap <silent> * :call VisualSelection('f', '')<CR>
 nnoremap j gj
 nnoremap k gk
 
+" window focus change bindings
 noremap <c-h> <c-w>h
 noremap <c-k> <c-w>k
 noremap <c-j> <c-w>j
 noremap <c-l> <c-w>l
 
+" Space-CR means quit out of everything.
 " Disable highlight when <leader><cr> is pressed
 " but preserve cursor coloring
 " nnoremap <leader><cr> :noh\|hi Cursor guibg=red<cr>
-nnoremap <leader><cr> :noh<cr>
+nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>
 augroup haskell
   autocmd!
-  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:SyntasticReset<cr>:GhcModTypeClear<cr>:HdevtoolsClear<cr>
+  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>:SyntasticReset<cr>:GhcModTypeClear<cr>:HdevtoolsClear<cr>
 "  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 
@@ -451,8 +453,9 @@ function! ToggleFindNerd()
 endfunction
 
 " If nerd tree is closed, find current file, if open, close it
-nmap <silent> <leader>f <ESC>:call ToggleFindNerd()<CR>
-nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
+" nmap <silent> <leader>f <ESC>:call ToggleFindNerd()<CR>
+" nmap <silent> <leader>f <ESC>:NERDTreeToggle<CR>
+nnoremap <silent> <leader>f <ESC>:NERDTreeFind<cr>
 
 
 " Enable some tabular presets for Haskell
@@ -536,7 +539,10 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_
 
 " Haskell Lint
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
-let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
+" let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
+let g:hdevtools_options = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings'
+let g:syntastic_haskell_hdevtools_args = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings'
+
 nnoremap <leader>sm :SyntasticToggleMode<CR>
 nnoremap <leader>sl :SyntasticCheck hlint<CR>
 nnoremap <leader>sc :SyntasticCheck<CR>
@@ -557,3 +563,9 @@ nnoremap <silent> <leader>ht :GhcModType<CR>
 nnoremap <silent> <leader>hT :GhcModTypeInsert<CR>
 " GHC errors and warnings
 nnoremap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
+
+" Shift-plus go to next error
+nnoremap + :lnext<cr>
+" Shift-minus go to previous error
+nnoremap _ :lprev<cr>
+
