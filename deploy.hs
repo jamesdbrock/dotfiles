@@ -1,5 +1,5 @@
 #! /usr/bin/env stack
--- stack --verbosity warn --system-ghc runghc --package shake
+-- stack --verbosity warn --system-ghc runghc --package shake --package strict
 -- vim: set filetype=haskell :
 
 import Development.Shake hiding (doesFileExist)
@@ -10,6 +10,10 @@ import System.Directory
 import Control.Monad
 import System.Posix.Files
 import System.Environment
+import System.IO
+import qualified System.IO.Strict as IO.Strict
+import System.IO.Error
+import Data.List
 
 main :: IO ()
 main = do
@@ -37,36 +41,45 @@ main = do
         , ".local/bin/pophoogle"
         ]
 
-    -- (home </>) <$> [".bashrc", ".vimrc", ".gvimrc"] |%> \ out -> do
-    --     alwaysRerun
-    --     putNormal $ "Append to " ++ out
-    --     localPath <- liftIO $ makeAbsolute $ dropWhile ('.'==) $ takeFileName out
-    --     liftIO $ appendFile out $ "\nsource " ++ localPath ++ "\n"
-
     home </> ".bashrc" %> \ out -> do
         alwaysRerun
-        putNormal $ "Append to " ++ out
-        localPath <- liftIO $ makeAbsolute "bashrc"
-        liftIO $ appendFile out $ "\nsource " ++ localPath ++ "\n"
+        contents <- liftIO $ liftM (either (const "") id) $ eitherReadFile out
+        let comment = "# bashrc included from jamesdbrock/dotfiles"
+        unless (isInfixOf comment contents) $ do
+            putNormal $ "Prepend to " ++ out
+            localPath <- liftIO $ makeAbsolute "bashrc"
+            _ <- liftIO $ eitherWriteFile out $ unlines [comment, "source " ++ localPath, "", contents]
+            return ()
 
     home </> ".vimrc" %> \ out -> do
         alwaysRerun
-        currentVimrc <- readFile out
-        putNormal $ "Append to " ++ out
-        localPath <- liftIO $ makeAbsolute $ dropWhile ('.'==) $ takeFileName out
-        liftIO $ appendFile out $ "\nsource " ++ localPath ++ "\n"
+        contents <- liftIO $ liftM (either (const "") id) $ eitherReadFile out
+        let comment = "# vimrc included from jamesdbrock/dotfiles"
+        unless (isInfixOf comment contents) $ do
+            putNormal $ "Prepend to " ++ out
+            localPath <- liftIO $ makeAbsolute "vimrc"
+            _ <- liftIO $ eitherWriteFile out $ unlines [comment, "source " ++ localPath, "", contents]
+            return ()
 
     home </> ".gvimrc" %> \ out -> do
         alwaysRerun
-        putNormal $ "Append to " ++ out
-        localPath <- liftIO $ makeAbsolute $ dropWhile ('.'==) $ takeFileName out
-        liftIO $ appendFile out $ "\nsource " ++ localPath ++ "\n"
+        contents <- liftIO $ liftM (either (const "") id) $ eitherReadFile out
+        let comment = "# gvimrc included from jamesdbrock/dotfiles"
+        unless (isInfixOf comment contents) $ do
+            putNormal $ "Prepend to " ++ out
+            localPath <- liftIO $ makeAbsolute "gvimrc"
+            _ <- liftIO $ eitherWriteFile out $ unlines [comment, "source " ++ localPath, "", contents]
+            return ()
 
     (home </>) <$> [".gitconfig", ".ghci"] |%> \ out ->
         liftIO $ lnFile out
 
     home </> ".local/bin/pophoogle" %> \ out ->
         liftIO $ lnFile out
+
+    home </> "vimrc.copy" %> \ out -> do
+        need ["vimrc"]
+        liftIO $ copyFile "vimrc" out
 
 -- vim +PluginInstall +qall
 -- stack install hdevtools
@@ -80,3 +93,10 @@ main = do
         ftoExists <- doesFileExist fto
         unless ffromExists $ error $ "File does not exist " ++ ffrom
         when ftoExists $ error $ "File already exists " ++ fto
+
+    eitherReadFile :: FilePath -> IO (Either IOError String)
+    eitherReadFile path = tryIOError $ withFile path ReadMode IO.Strict.hGetContents
+
+    eitherWriteFile :: FilePath -> String -> IO (Either IOError ())
+    eitherWriteFile path contents = tryIOError $ withFile path WriteMode (`hPutStr` contents)
+
