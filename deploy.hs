@@ -54,7 +54,7 @@ main = do
     home </> ".vimrc" %> \ out -> do
         alwaysRerun
         contents <- liftIO $ liftM (either (const "") id) $ eitherReadFile out
-        let comment = "# vimrc included from jamesdbrock/dotfiles"
+        let comment = "\" vimrc included from jamesdbrock/dotfiles"
         unless (isInfixOf comment contents) $ do
             putNormal $ "Prepend to " ++ out
             localPath <- liftIO $ makeAbsolute "vimrc"
@@ -64,7 +64,7 @@ main = do
     home </> ".gvimrc" %> \ out -> do
         alwaysRerun
         contents <- liftIO $ liftM (either (const "") id) $ eitherReadFile out
-        let comment = "# gvimrc included from jamesdbrock/dotfiles"
+        let comment = "\" gvimrc included from jamesdbrock/dotfiles"
         unless (isInfixOf comment contents) $ do
             putNormal $ "Prepend to " ++ out
             localPath <- liftIO $ makeAbsolute "gvimrc"
