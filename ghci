@@ -2,3 +2,6 @@
 :set editor vim
 :set -Wall
 :set -XOverloadedStrings
+
+:m +Data.List
+:m +Data.Maybe

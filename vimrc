@@ -549,9 +549,11 @@ nnoremap <leader>sc :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
 
 " http://www.stephendiehl.com/posts/vim_haskell.html
-au FileType haskell nnoremap <buffer> <F2> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <F3> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <F4> :HdevtoolsInfo<CR>
+" au FileType haskell nnoremap <buffer> <F2> :HdevtoolsType<CR>
+" au FileType haskell nnoremap <buffer> <F3> :HdevtoolsClear<CR>
+" au FileType haskell nnoremap <buffer> <F4> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> t :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> T :HdevtoolsInfo<CR>
 
 
 " Show types in completion suggestions
