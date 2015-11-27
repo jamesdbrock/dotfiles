@@ -24,3 +24,5 @@ let { charSub :: Char -> Char; charSub '0' = '₀'; charSub '1' = '₁'; charSub
 let { showRatio :: Rational -> String; showRatio r = (charSup <$> show (numerator r)) ++ "/" ++ (charSub <$> show (denominator r)) }
 
 let { showDouble :: Double -> String; showDouble x = let (n,d) = (numerator $ toRational x, denominator $ toRational x) in let (q,r) = quotRem n d in show q ++ " + " ++ show r ++ "/" ++ show d }
+
+let { hunum :: RealFrac a => a -> String; hunum x = let (xl, xr) = properFraction x in let xrp = approxRational xr (x/2000) in if numerator xrp /= 0 then show xl ++ showRatio xrp else show xl }
