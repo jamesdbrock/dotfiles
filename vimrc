@@ -338,10 +338,10 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " http://vim.wikia.com/wiki/Easier_buffer_switching
-" :nnoremap <F5> :buffers<CR>:buffer<Space>
+:nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " https://github.com/mileszs/ack.vim
-" :nnoremap <F6> :Ack<CR>
+:nnoremap <F6> :Ack<CR>
 
 " http://stackoverflow.com/questions/2404879/in-vim-how-can-i-have-a-permenant-status-line-showing-me-the-name-of-the-curren
 set laststatus=2
@@ -570,4 +570,42 @@ nnoremap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
 nnoremap + :lnext<cr>
 " Shift-minus go to previous error
 nnoremap _ :lprev<cr>
+
+
+
+" Git
+
+let g:extradite_width = 60
+" Hide messy Ggrep output and copen automatically
+function! NonintrusiveGitGrep(term)
+  execute "copen"
+  " Map 't' to open selected item in new tab
+  execute "nnoremap <silent> <buffer> t <C-W><CR><C-W>T"
+  execute "silent! Ggrep " . a:term
+  execute "redraw!"
+endfunction
+
+command! -nargs=1 GGrep call NonintrusiveGitGrep(<q-args>)
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gg :copen<CR>:GGrep
+nnoremap <leader>gl :Extradite!<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gb :Gblame<CR>
+
+function! CommittedFiles()
+  " Clear quickfix list
+  let qf_list = []
+  " Find files committed in HEAD
+  let git_output = system("git diff-tree --no-commit-id --name-only -r HEAD\n")
+  for committed_file in split(git_output, "\n")
+    let qf_item = {'filename': committed_file}
+    call add(qf_list, qf_item)
+  endfor
+  " Fill quickfix list with them
+  call setqflist(qf_list, '')
+endfunction
+
+" Show list of last-committed files
+nnoremap <silent> <leader>g? :call CommittedFiles()<CR>:copen<CR>
+
 
