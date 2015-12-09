@@ -1,4 +1,4 @@
-export LESS=--jump-target=.1
+export LESS="-r --jump-target=.2"
 
 gitlogn() {
 git log --graph --color --name-status --decorate=full $1 $2 $3 $4 $5 $6 $7 $8 $9
