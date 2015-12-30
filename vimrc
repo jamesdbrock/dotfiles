@@ -540,8 +540,12 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_
 " Haskell Lint
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
 " let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
-let g:hdevtools_options = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings'
-let g:syntastic_haskell_hdevtools_args = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings'
+" stack path --snapshot-pkg-db
+" let g:hdevtools_options = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings'
+" This works:
+" hdevtools check -g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings -g-package-db -g /home/jbrock/.stack/snapshots/x86_64-linux/lts-3.6/7.10.2/pkgdb deploy.hs
+let g:hdevtools_options = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings -g-package-db -g ' . system("stack path --snapshot-pkg-db")
+let g:syntastic_haskell_hdevtools_args = g:hdevtools_options
 
 nnoremap <leader>sm :SyntasticToggleMode<CR>
 nnoremap <leader>sl :SyntasticCheck hlint<CR>
