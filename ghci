@@ -10,6 +10,7 @@
 :m +Data.Maybe
 :m +Data.Char
 :m +Data.Ratio
+:m +Data.Traversable
 :m +Control.Applicative
 :m +Control.Monad
 :m +Control.Lens

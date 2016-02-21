@@ -108,6 +108,8 @@ set shell=bash\ -i
 " highlight Normal guifg=white guibg=black
 " " colorscheme solarized
 
+" for HdevtoolsType 2-line results
+set cmdheight=2
 
 noremap ; :
 noremap : ;
@@ -540,8 +542,8 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_
 " Haskell Lint
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
 " let g:syntastic_haskell_hdevtools_args = '-g -Wall -g -isrc'
-let g:hdevtools_options = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings'
-let g:syntastic_haskell_hdevtools_args = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings'
+let g:hdevtools_options = '-g-ilib -g-isrc -g-i. -g-Wall -g-XOverloadedStrings -g-fdefer-type-errors'
+let g:syntastic_haskell_hdevtools_args = g:hdevtools_options
 
 nnoremap <leader>sm :SyntasticToggleMode<CR>
 nnoremap <leader>sl :SyntasticCheck hlint<CR>
