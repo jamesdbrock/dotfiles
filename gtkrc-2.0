@@ -1,0 +1,25 @@
+# https://groups.google.com/forum/#!topic/vim_use/YpNub5zT3hM
+# https://wiki.gnome.org/Attic/GnomeArt/Tutorials/GtkThemes
+# color the right and bottom edges of maximized gvim windows
+style "gvimform" {
+    bg[NORMAL] = "#000000"
+}
+widget "vim-main-window.*GtkForm" style "gvimform"
+
+
+
+# style "gvimmenubar" {
+#     bg[NORMAL] = "#000000"
+#     fg[NORMAL] = "#DDDDDD"
+# }
+# widget "vim-main-window.*GtkMenuBar" style "gvimmenubar"
+# class "vim-main-window.*GtkMenuBar" style "gvimmenubar"
+# widget "vim-main-window.*GtkMenu" style "gvimmenubar"
+# class "vim-main-window.*GtkMenu" style "gvimmenubar"
+# widget "vim-main-window.*GtkMenuItem" style "gvimmenubar"
+# class "vim-main-window.*GtkMenuItem" style "gvimmenubar"
+
+# widget_class "*<GtkMenuBar>*" style "gvimmenubar"
+# # widget "vim-main-window.*<GtkMenuBar>*" style "gvimmenubar"
+
+# See also https://github.com/seanyeh/gtk2-theme-aphotic/blob/master/Aphotic/gtk-2.0/gtkrc
