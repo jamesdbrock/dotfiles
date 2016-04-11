@@ -12,3 +12,10 @@ ack() {
     ack-grep -k --color --heading --break --pager="less -F -r" $1 $2 $3 $4 $5 $6 $7 $8 $9
 }
 
+ghcel () {
+    stack ghc --package split --verbosity error -- -e "interact $ unlines . $1 . lines"
+}
+
+ghce () {
+    stack ghc --package split --verbosity error -- -e "interact $ $1"
+}
