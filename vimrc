@@ -311,3 +311,8 @@ function! VisualSelection(direction, extra_filter) range
   let @" = l:saved_reg
 endfunction
 
+" colorscheme default, may be overridden by vimrc.plugins
+try
+  colorscheme murphy
+catch
+endtry
