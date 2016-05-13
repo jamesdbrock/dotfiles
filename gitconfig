@@ -8,4 +8,7 @@
 	default = current
 [core]
 	editor = /usr/bin/vim
-	excludesfile = /home/jdb/.gitignore_global
+	excludesfile = ~/.gitignore_global
+
+[alias]
+	logn = log --graph --color --name-status --decorate=full
