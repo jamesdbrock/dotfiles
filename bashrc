@@ -21,6 +21,13 @@ ghce () {
     stack ghc --package split --verbosity error -- -e "interact ( $* )"
 }
 
+# apply function to lines
+# from column 4 of passwd, show entries which contain an uppercase and don't contain a comma and consist of exactly two words
+# cat /etc/passwd | ghcel 'filter ((==2).length.words) . '"filter (not.any (==','))"'. filter (any isUpper) . fmap ((!!4) . splitOn ":")'
+ghcel () {
+    stack ghc --package split --verbosity error -- -e "interact $ unlines . ( $* ) . lines"
+}
+
 # fmap function to lines
 # example: split on commas and select the 0th and 3rd columns
 # echo "a,b,c,d,e,f" | ghcelf 'unwords . flip fmap [0,3] . (!!)  . splitOn ","'
@@ -28,9 +35,3 @@ ghcelf () {
     stack ghc --package split --verbosity error -- -e "interact $ unlines . fmap ( $* ) . lines"
 }
 
-# apply function to lines
-# from column 4 of passwd, show entries which contain an uppercase and don't contain a comma and consist of exactly two words
-# cat /etc/passwd | ghcel 'filter ((==2).length.words) . '"filter (not.any (==','))"'. filter (any isUpper) . fmap ((!!4) . splitOn ":")'
-ghcel () {
-    stack ghc --package split --verbosity error -- -e "interact $ unlines . ( $* ) . lines"
-}
