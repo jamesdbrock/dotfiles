@@ -1,0 +1,8 @@
+#
+# https://github.com/Russell91/sshrc/
+
+# ~/.sshrc.d/.vimrc
+export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
+
+# ~/.sshrc.d/.gitconfig
+ln -s -f "$SSHHOME/.sshrc.d/.gitconfig" ~/.gitconfig
