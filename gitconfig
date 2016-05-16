@@ -11,4 +11,4 @@
 	excludesfile = ~/.gitignore_global
 
 [alias]
-	logn = log --graph --color --name-status --decorate=full
+	logn = log --graph --color --name-status --decorate=full --date-order
