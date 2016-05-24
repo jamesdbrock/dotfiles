@@ -2,7 +2,19 @@
 # https://github.com/Russell91/sshrc/
 
 # ~/.sshrc.d/.vimrc
-export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
+if [ -f "$SSHHOME/.sshrc.d/vimrc" ]
+then
+    export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc' | source \$MYVIMRC"
+fi
 
 # ~/.sshrc.d/.gitconfig
-ln -s -f "$SSHHOME/.sshrc.d/.gitconfig" ~/.gitconfig
+if [ ! -f ~/.gitconfig ] && [ -f "$SSHHOME/.sshrc.d/gitconfig" ]
+then
+    ln -s -f "$SSHHOME/.sshrc.d/gitconfig" ~/.gitconfig
+fi
+
+# ~/.sshrc.d/.bashrc
+if [ -f "$SSHHOME/.sshrc.d/bashrc" ]
+then
+    source $SSHHOME/.sshrc.d/bashrc
+fi
