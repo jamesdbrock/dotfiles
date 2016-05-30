@@ -7,7 +7,8 @@ lll() {
     ls -lF --color $1 $2 $3 $4 $5 $6 $7 $8 $9 | less -F -r
 }
 
+# TODO put these options in .ackrc?
 ack() {
-    ack-grep -k --color --heading --break --pager="less -F -r" $1 $2 $3 $4 $5 $6 $7 $8 $9
+    ack-grep -k --color --heading --break --pager="less -r" $1 $2 $3 $4 $5 $6 $7 $8 $9
 }
 
