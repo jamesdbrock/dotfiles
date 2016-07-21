@@ -10,10 +10,6 @@ set softtabstop=4
 " http://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
 set shell=bash\ -i
 
-" set background=dark " tell vim what color the background is.
-" highlight Normal guifg=white guibg=black
-" " colorscheme solarized
-
 noremap ; :
 noremap : ;
 
@@ -69,12 +65,27 @@ set mat=2
 set noerrorbells
 set vb t_vb=
 
+" http://vim.wikia.com/wiki/256_colors_in_vim
+" set t_Co=256
+" set t_AB=<Esc>[48;5;%dm
+" set t_AF=<Esc>[38;5;%dm
+
+" set background=dark " tell vim what color the background is.
+
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
   " render properly when inside 256-color tmux and GNU screen.
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
 endif
+
+" highlight Normal guifg=white guibg=black
+" " colorscheme solarized
+
+" http://vi.stackexchange.com/questions/356/how-can-i-set-up-a-ruler-at-a-specific-column
+set colorcolumn=81
+highlight ColorColumn ctermbg=235 guibg=#262626
+" let &colorcolumn="80,".join(range(120,999),",")
 
 
 " Remap `Q` to play the macro stored in the 'q' register. This way you can
