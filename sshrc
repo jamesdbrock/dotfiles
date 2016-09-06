@@ -1,6 +1,12 @@
 #
 # https://github.com/Russell91/sshrc/
 
+# To setup, link this file as ~/.sshrc and then make a ~/.sshrc.d directory
+# which contains:
+# bashrc -> /home/jdb/work/dotfiles/bashrc
+# gitconfig -> /home/jdb/work/dotfiles/gitconfig
+# vimrc -> /home/jdb/work/dotfiles/vimrc
+
 # ~/.sshrc.d/.vimrc
 if [ -f "$SSHHOME/.sshrc.d/vimrc" ]
 then
