@@ -1,0 +1,5 @@
+# vi:set syntax=bash
+
+# hdevtools in a stack project
+alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools -- '
+

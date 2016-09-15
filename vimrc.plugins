@@ -230,7 +230,10 @@ let g:syntastic_haskell_checkers = ['ghc_mod', 'hdevtools', 'hlint']
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
 " hdevtools in a stack project
-" hdevtools is defined by alias in bashrc.ghce: alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools -- '
+" http://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
+" https://github.com/tpope/vim-fugitive/issues/666
+" hdevtools is defined by alias in bashrc.vim-hdevtools
+set shell=/bin/bash\ --rcfile\ ~/.bashrc.vim-hdevtools\ -i
 let g:hdevtools_options = '-g-Wall -g-fdefer-type-errors'
 let g:syntastic_haskell_hdevtools_args = g:hdevtools_options
 

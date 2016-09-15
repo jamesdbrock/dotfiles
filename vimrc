@@ -7,8 +7,6 @@ set number
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-" http://stackoverflow.com/questions/9092347/how-to-make-vim-use-the-same-environment-as-my-login-shell-when-running-commands
-set shell=bash\ -i
 
 noremap ; :
 noremap : ;
