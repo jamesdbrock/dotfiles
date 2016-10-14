@@ -21,7 +21,7 @@
         #
         #     git fetch origin branch:branch
         #
-        reclone = "!git fetch origin; bash -c 'for b in $(git branch-tracking);do git fetch --verbose --update-head-ok origin $b:$b;done'"
+        reclone = "!git fetch origin; bash -c 'for b in $(git branch-tracking);do git fetch --verbose origin $b:$b;done'"
 
         # List all remote tracking branches for remote 'origin'.
         branch-tracking = "!bash -c 'comm -12 <(ls $(git rev-parse --git-dir)/refs/heads/) <(ls $(git rev-parse --git-dir)/refs/remotes/origin/)'"
