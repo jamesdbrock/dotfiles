@@ -13,3 +13,15 @@
 
 [alias]
 	logn = log --graph --color --name-status --decorate=full --date-order
+
+        # Make this repo indistinguishable from a fresh clone.
+        #
+        # Without checking anything out or changing the working tree,
+        # gently fast-forward all remote tracking branches of origin using:
+        #
+        #     git fetch origin branch:branch
+        #
+        reclone = "!git fetch origin; bash -c 'for b in $(git branch-tracking);do git fetch --verbose --update-head-ok origin $b:$b;done'"
+
+        # List all remote tracking branches for remote 'origin'.
+        branch-tracking = "!bash -c 'comm -12 <(ls $(git rev-parse --git-dir)/refs/heads/) <(ls $(git rev-parse --git-dir)/refs/remotes/origin/)'"
