@@ -7,20 +7,26 @@
 # gitconfig -> /home/jdb/work/dotfiles/gitconfig
 # vimrc -> /home/jdb/work/dotfiles/vimrc
 
-# ~/.sshrc.d/.vimrc
+# ~/.vimrc
 if [ -f "$SSHHOME/.sshrc.d/vimrc" ]
 then
     export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc' | source \$MYVIMRC"
 fi
 
-# ~/.sshrc.d/.gitconfig
+# ~/.gitconfig
 if [ ! -f ~/.gitconfig ] && [ -f "$SSHHOME/.sshrc.d/gitconfig" ]
 then
     ln -s -f "$SSHHOME/.sshrc.d/gitconfig" ~/.gitconfig
 fi
 
-# ~/.sshrc.d/.bashrc
+# ~/.bashrc
 if [ -f "$SSHHOME/.sshrc.d/bashrc" ]
 then
     source $SSHHOME/.sshrc.d/bashrc
+fi
+
+# ~/.tmux.conf
+if [ ! -f ~/.tmux.conf ] && [ -f "$SSHHOME/.sshrc.d/tmux.conf" ]
+then
+    ln -s -f "$SSHHOME/.sshrc.d/tmux.conf" ~/.tmux.conf
 fi
