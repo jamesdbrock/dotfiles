@@ -10,6 +10,11 @@
 	editor = /usr/bin/vim
 	excludesfile = ~/.gitignore_global
 	pager = less -F -X
+        integrationbranch = origin/dev # for alias base
+
+[tag]                                                                                                                                         sort = version:refname
+
+[diff]                                                                                                                                        compactionHeuristic = true
 
 [alias]
 	logn = log --graph --color --name-status --decorate=full --date-order
@@ -25,3 +30,6 @@
 
         # List all remote tracking branches for remote 'origin'.
         branch-tracking = "!bash -c 'comm -12 <(ls $(git rev-parse --git-dir)/refs/heads/) <(ls $(git rev-parse --git-dir)/refs/remotes/origin/)'"
+
+        # from putty:/home/asayers/.dotfiles/git/.gitconfig
+        base = !"f() { git name-rev --tags --name-only --always --no-undefined $(git merge-base $(git config core.integrationBranch) ${1:-HEAD}); }; f"
