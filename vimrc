@@ -85,6 +85,9 @@ set colorcolumn=81
 highlight ColorColumn ctermbg=235 guibg=#262626
 " let &colorcolumn="80,".join(range(120,999),",")
 
+" http://vim.wikia.com/wiki/Highlight_current_line
+set cursorline
+highlight CursorLine ctermbg=234
 
 " Remap `Q` to play the macro stored in the 'q' register. This way you can
 " record a throw-away macro with `qq` and play it with `Q`. Also, nobody ever
