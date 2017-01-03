@@ -72,7 +72,7 @@ Plugin 'airblade/vim-gitgutter'
 " Plugin 'neovimhaskell/haskell-vim'
 " Plugin 'enomsg/vim-haskellConcealPlus'
 Plugin 'eagletmt/ghcmod-vim'
-" Plugin 'eagletmt/neco-ghc'
+" Plugin 'eagletmt/neco-ghc' " A completion plugin for Haskell, using ghc-mod
 " Plugin 'Twinside/vim-hoogle'
 
 Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo

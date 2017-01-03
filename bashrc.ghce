@@ -1,9 +1,5 @@
 # vi:set syntax=bash
 
-
-# hdevtools in a stack project
-alias hdevtools='stack exec --no-ghc-package-path --package hdevtools hdevtools -- '
-
 # http://www.joachim-breitner.de/blog/156-Haskell_on_the_Command_Line
 
 # apply function to entire stream
