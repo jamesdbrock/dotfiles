@@ -3,8 +3,8 @@
 :set prompt2 "   > "
 :set editor vim
 --- :set -Wall
-:set -XOverloadedStrings
-:set -XFlexibleContexts
+--- :set -XOverloadedStrings
+--- :set -XFlexibleContexts
 
 :m +Data.Function
 :m +Data.List
