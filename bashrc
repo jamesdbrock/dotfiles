@@ -1,8 +1,6 @@
 export EDITOR="vim"
 export LESS="-R --jump-target=.2"
 
-# export PS1='$(RET=$?; if [ $RET != 0 ] ; then echo "\[\033[01;32m\]return\[\033[00m\] $RET"; fi )\n${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
 # http://stackoverflow.com/questions/1862510/how-can-the-last-commands-wall-time-be-put-in-the-bash-prompt
 
 function timer_start {
@@ -17,8 +15,9 @@ function timer_stop {
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
-export PS1='${timer_show}s $(RET=$?; if [ $RET != 0 ] ; then echo "\[\033[01;32m\]return\[\033[00m\] $RET"; fi )\n${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# http://unix.stackexchange.com/questions/14113/is-it-possible-to-set-gnome-terminals-title-to-userhost-for-whatever-host-i
 
+export PS1='\[\e]0;\u@\h\a\]\[\033[38;5;240m\]${timer_show}s\[\033[00m\] $(RET=$?; if [ $RET != 0 ] ; then echo " \[\033[38;5;88m\][$RET]\[\033[00m\]"; fi ) ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
 
 # ls -l | less
 lll() {
