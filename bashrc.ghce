@@ -2,24 +2,28 @@
 
 # http://www.joachim-breitner.de/blog/156-Haskell_on_the_Command_Line
 
-# apply function to entire stream
+# apply function (String -> String) to entire stream
 # example: name the argument
 # echo "hello" | ghce '\x -> sort x'
 ghce () {
-    stack ghc --package split --verbosity error -- -e "interact ( $* )"
+    stack ghc --package split --package safe --verbosity error -- -e "interact ( $* )"
 }
 
-# apply function to lines
+# apply function ([String] -> [String]) to all lines
+#
 # from column 4 of passwd, show entries which contain an uppercase and don't contain a comma and consist of exactly two words
 # cat /etc/passwd | ghcel 'filter ((==2).length.words) . '"filter (not.any (==','))"'. filter (any isUpper) . fmap ((!!4) . splitOn ":")'
+#
+# grep from stdin lines for which column 4 is numerically greater than 100
+# ghcel "filter (\l -> (words l ^? ix 4) >>= readMay & maybe False (>100))"
 ghcel () {
-    stack ghc --package split --verbosity error -- -e "interact $ unlines . ( $* ) . lines"
+    stack ghc --package split --package safe --verbosity error -- -e "interact $ unlines . ( $* ) . lines"
 }
 
-# fmap function to lines
+# fmap function (String -> String) to each line
 # example: split on commas and select the 0th and 3rd columns
 # echo "a,b,c,d,e,f" | ghcelf 'unwords . flip fmap [0,3] . (!!)  . splitOn ","'
 ghcelf () {
-    stack ghc --package split --verbosity error -- -e "interact $ unlines . fmap ( $* ) . lines"
+    stack ghc --package split --package safe --verbosity error -- -e "interact $ unlines . fmap ( $* ) . lines"
 }
 

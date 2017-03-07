@@ -16,6 +16,7 @@
 :m +Control.Applicative
 :m +Control.Monad
 :m +Control.Lens
+:m +Safe
 
 
 --- let charsSup = "⁰¹²³⁴⁵⁶⁷⁸⁹"
