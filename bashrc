@@ -17,7 +17,7 @@ PROMPT_COMMAND=timer_stop
 
 # http://unix.stackexchange.com/questions/14113/is-it-possible-to-set-gnome-terminals-title-to-userhost-for-whatever-host-i
 
-export PS1='\[\e]0;\u@\h\a\]\[\033[38;5;240m\]${timer_show}s\[\033[00m\] $(RET=$?; if [ $RET != 0 ] ; then echo " \[\033[38;5;88m\][$RET]\[\033[00m\]"; fi ) ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
+export PS1='\[\e]0;\u@\h\a\]\[\033[38;5;240m\]${timer_show}s\[\033[00m\] $(RET=$?; if [ $RET != 0 ] ; then echo " \[\033[38;5;88m\][$RET]\[\033[00m\]"; fi ) ${debian_chroot:+($debian_chroot)}\[\e[38;5;178m\]\u\[\e[39m\]\[\e[38;5;239m\]@\[\e[39m\]\[\e[38;5;106m\]\h\[\e[39m\]\[\e[38;5;239m\]:\[\e[39m\]\[\e[38;5;34m\]\w\[\e[39m\]\n\$ '
 
 # ls -l | less
 lll() {
