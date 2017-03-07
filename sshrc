@@ -21,9 +21,12 @@ then
 fi
 
 # ~/.bashrc
+# to make this work in non-login bash shells, put a line in the .bashrc:
+#     source .bashrc.from.sshrc
 if [ -f "$SSHHOME/.sshrc.d/bashrc" ]
 then
     source $SSHHOME/.sshrc.d/bashrc
+    ln -s -f "$SSHHOME/.sshrc.d/bashrc" ~/.bashrc.from.sshrc
 fi
 
 # ~/.tmux.conf
