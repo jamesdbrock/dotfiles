@@ -203,6 +203,11 @@ syntax enable
 hi Search ctermfg=white ctermbg=173 cterm=none guifg=#ffffff guibg=#e5786d gui=none
 hi! link Visual Search
 
+" http://stackoverflow.com/questions/4256697/vim-search-and-highlight-but-do-not-jump
+" nnoremap * *``
+" nnoremap * :keepjumps normal *``<cr>
+nnoremap * :keepjumps normal! mi*`i<CR>
+
 " Enable filetype plugins
 " filetype plugin on
 " filetype indent on
