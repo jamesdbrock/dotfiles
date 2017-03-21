@@ -6,17 +6,17 @@
 --- :set -XOverloadedStrings
 --- :set -XFlexibleContexts
 
-:m +Data.Function
-:m +Data.List
-:m +Data.List.Split
-:m +Data.Maybe
-:m +Data.Char
-:m +Data.Ratio
-:m +Data.Traversable
-:m +Control.Applicative
-:m +Control.Monad
-:m +Control.Lens
-:m +Safe
+--- :m +Data.Function
+--- :m +Data.List
+--- :m +Data.List.Split
+--- :m +Data.Maybe
+--- :m +Data.Char
+--- :m +Data.Ratio
+--- :m +Data.Traversable
+--- :m +Control.Applicative
+--- :m +Control.Monad
+--- :m +Control.Lens
+--- :m +Safe
 
 
 --- let charsSup = "⁰¹²³⁴⁵⁶⁷⁸⁹"
