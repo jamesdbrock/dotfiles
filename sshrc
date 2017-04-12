@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# http://stackoverflow.com/questions/2499794/how-to-fix-a-locale-setting-warning-from-perl
+# LANG=C
+
 # https://github.com/Russell91/sshrc/
 
 # To setup, link this file as ~/.sshrc and then make a ~/.sshrc.d directory
@@ -11,13 +14,16 @@
 # ~/.vimrc
 if [ -f "$SSHHOME/.sshrc.d/vimrc" ]
 then
-    export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc' | source \$MYVIMRC"
+    # export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc' | source \$MYVIMRC"
+    cp -f "$SSHHOME/.sshrc.d/vimrc" ~/.vimrc
+
 fi
 
 # ~/.gitconfig
 if [ ! -f ~/.gitconfig ] && [ -f "$SSHHOME/.sshrc.d/gitconfig" ]
 then
-    ln -s -f "$SSHHOME/.sshrc.d/gitconfig" ~/.gitconfig
+#    ln -s -f "$SSHHOME/.sshrc.d/gitconfig" ~/.gitconfig
+    cp -f "$SSHHOME/.sshrc.d/gitconfig" ~/.gitconfig
 fi
 
 # ~/.bashrc
@@ -25,14 +31,16 @@ fi
 #     source .bashrc.from.sshrc
 if [ -f "$SSHHOME/.sshrc.d/bashrc" ]
 then
-    source $SSHHOME/.sshrc.d/bashrc
-    ln -s -f "$SSHHOME/.sshrc.d/bashrc" ~/.bashrc.from.sshrc
+#    source $SSHHOME/.sshrc.d/bashrc
+    # ln -s -f "$SSHHOME/.sshrc.d/bashrc" ~/.bashrc.from.sshrc
+    cp -f "$SSHHOME/.sshrc.d/bashrc" ~/.bashrc.from.sshrc
 fi
 
 # ~/.tmux.conf
 if [ ! -f ~/.tmux.conf ] && [ -f "$SSHHOME/.sshrc.d/tmux.conf" ]
 then
-    ln -s -f "$SSHHOME/.sshrc.d/tmux.conf" ~/.tmux.conf
+    # ln -s -f "$SSHHOME/.sshrc.d/tmux.conf" ~/.tmux.conf
+    cp -f "$SSHHOME/.sshrc.d/tmux.conf" ~/.tmux.conf
 fi
 
 
