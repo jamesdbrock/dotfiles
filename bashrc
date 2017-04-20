@@ -1,6 +1,14 @@
 export EDITOR="vim"
 export LESS="-R --jump-target=.2"
 
+# http://askubuntu.com/questions/339546/how-do-i-see-the-history-of-the-commands-i-have-run-in-tmux
+# avoid duplicates..
+export HISTCONTROL=ignoredups:erasedups
+# append history entries..
+shopt -s histappend
+# After each command, save and reload history
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 # http://stackoverflow.com/questions/1862510/how-can-the-last-commands-wall-time-be-put-in-the-bash-prompt
 
 function timer_start {
@@ -13,7 +21,7 @@ function timer_stop {
 }
 
 trap 'timer_start' DEBUG
-PROMPT_COMMAND=timer_stop
+export PROMPT_COMMAND="timer_stop; $PROMPT_COMMAND"
 
 # http://unix.stackexchange.com/questions/14113/is-it-possible-to-set-gnome-terminals-title-to-userhost-for-whatever-host-i
 
@@ -45,7 +53,7 @@ export LANGUAGE=en_US:en
 # export LC_CTYPE=en_US.utf8
 # export LC_NUMERIC=en_US.utf8
 # export LC_TIME=ja_JP.utf8
-export LC_TIME=ja_JP.utf8
+# export LC_TIME=ja_JP.utf8
 # export LC_COLLATE=en_US.utf8
 # export LC_MONETARY=en_US.utf8
 # export LC_MESSAGES=C.UTF-8

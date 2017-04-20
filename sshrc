@@ -34,6 +34,7 @@ then
 #    source $SSHHOME/.sshrc.d/bashrc
     # ln -s -f "$SSHHOME/.sshrc.d/bashrc" ~/.bashrc.from.sshrc
     cp -f "$SSHHOME/.sshrc.d/bashrc" ~/.bashrc.from.sshrc
+    source ~/.bashrc.from.sshrc # do this or else we'll see the last .bashrc.from.sshrc
 fi
 
 # ~/.tmux.conf
