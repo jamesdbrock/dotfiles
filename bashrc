@@ -35,3 +35,6 @@ ack() {
 ford() {
     for i in $(find . -maxdepth 1 -mindepth 1 -type d); do cd $i; echo -e "\n\n$i"; $* ; cd ..; done
 }
+
+# disable terminal freeze Ctrl-s
+stty -ixon

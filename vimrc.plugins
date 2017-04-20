@@ -56,7 +56,8 @@ Plugin 'vim-scripts/wombat256.vim'
 
 " Bars, panels, and files
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 
@@ -76,6 +77,10 @@ Plugin 'eagletmt/ghcmod-vim'
 " Plugin 'Twinside/vim-hoogle'
 
 Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
+
+" HTML
+" Plugin 'alvan/vim-closetag'
+Plugin 'tpope/vim-ragtag'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -302,6 +307,13 @@ endfunction
 " Show list of last-committed files
 nnoremap <silent> <leader>g? :call CommittedFiles()<CR>:copen<CR>
 
+" " filenames like *.xml, *.html, *.xhtml, ...
+" let g:closetag_filenames = "*.html,*.xhtml,*.htm,*.xml,*.md,*.markdown"
+" " copied from the internals of closetag.vim
+" " exec "au BufNewFile,Bufread " . g:closetag_filenames . " inoremap <silent> <buffer> ,, :call <SID>CloseTagFun()<Cr>"
+
+" vim-ragtag
+let g:ragtag_global_maps = 1
 
 " repeated, to override some plugin that is setting this
 highlight ColorColumn ctermbg=235 guibg=#262626
