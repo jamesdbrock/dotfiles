@@ -36,3 +36,6 @@
 
         # from putty:/home/asayers/.dotfiles/git/.gitconfig
         base = !"f() { git name-rev --tags --name-only --always --no-undefined $(git merge-base $(git config core.integrationBranch) ${1:-HEAD}); }; f"
+
+        # reset-checkout. If safe to do so, checkout the current branch which was force-pushed at the origin.
+        recheckout = "!THISBRANCH=$(git symbolic-ref --short HEAD);git checkout -B ${THISBRANCH} origin/${THISBRANCH}"
