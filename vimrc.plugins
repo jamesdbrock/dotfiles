@@ -86,6 +86,8 @@ Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :Hdevtools
 " Plugin 'alvan/vim-closetag'
 Plugin 'tpope/vim-ragtag'
 
+Plugin 'vim-scripts/gnupg.vim' " edit gpg encrypted files
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -321,3 +323,6 @@ let g:ragtag_global_maps = 1
 
 " repeated, to override some plugin that is setting this
 highlight ColorColumn ctermbg=235 guibg=#262626
+
+" gnupg
+let g:GPGExecutable = 'gpg2'
