@@ -12,9 +12,10 @@
 	pager = less -F -X
         integrationbranch = origin/dev # for alias base
 
-[tag]                                                                                                                                         sort = version:refname
+[tag]                                                                                                                   	sort = version:refname
 
-[diff]                                                                                                                                        compactionHeuristic = true
+[diff]                                                                                                                  	compactionHeuristic = true
+	algorithm = patience
 
 [interactive]
 	singlekey = true
