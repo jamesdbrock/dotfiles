@@ -63,7 +63,7 @@ Plugin 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 
 Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar' " causes vim to background on startup when set shell=bash bashrc.vim-hdevtools
 
 " Text manipulation
 Plugin 'godlygeek/tabular'
