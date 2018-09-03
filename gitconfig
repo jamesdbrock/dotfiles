@@ -1,6 +1,7 @@
 [user]
 	name = James Brock
 	email = jamesbrock@gmail.com
+	signingkey = 891CC1AB11A07C82
 
 [merge]
         conflictstyle = diff3
@@ -40,3 +41,5 @@
 
         # reset-checkout. If safe to do so, checkout the current branch which was force-pushed at the origin.
         recheckout = "!THISBRANCH=$(git symbolic-ref --short HEAD);git checkout -B ${THISBRANCH} origin/${THISBRANCH}"
+[gpg]
+	program = gpg2
