@@ -10,13 +10,25 @@ shopt -s histappend
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # http://stackoverflow.com/questions/1862510/how-can-the-last-commands-wall-time-be-put-in-the-bash-prompt
+# https://github.com/jichu4n/bash-command-timer/blob/master/bash_command_timer.sh
+# https://seasonofcode.com/posts/debug-trap-and-prompt_command-in-bash.html
 
 function timer_start {
+  if [ -n "$timer_at_prompt" ]; then
+    unset timer_at_prompt
+    return
+  fi
   timer=${timer:-$SECONDS}
 }
 
 function timer_stop {
-  timer_show=$(($SECONDS - $timer))
+  timer_at_prompt=1
+  time_elapsed=$(($SECONDS - $timer))
+  if [ $time_elapsed -gt 3 ]; then
+    timer_show="${time_elapsed}s "
+  else
+    timer_show=""
+  fi
   unset timer
 }
 
@@ -25,7 +37,21 @@ export PROMPT_COMMAND="timer_stop; $PROMPT_COMMAND"
 
 # http://unix.stackexchange.com/questions/14113/is-it-possible-to-set-gnome-terminals-title-to-userhost-for-whatever-host-i
 
-export PS1='\[\e[48;5;234m\]\[\e]0;\u  \h  ${PWD}\a\]\[\033[38;5;240m\]${timer_show}s $(RET=$?; if [ $RET != 0 ] ; then echo " \[\033[38;5;88m\][$RET]"; fi ) ${debian_chroot:+($debian_chroot)}\[\e[38;5;142m\]\u\[\e[38;5;242m\]@\[\e[38;5;214m\]\h\[\e[38;5;242m\]:\[\e[38;5;151m\]\w \[\e[0m\]\[\e[38;5;234m\]\[\e[0m\]\n\[\e[38;5;242m\]\$\[\e[0m\] '
+terminaltitle='\[\e[48;5;234m\]\[\e]0;\u  \h  ${PWD}\a\]'
+timerrender='\[\033[38;5;240m\]${timer_show}'
+errorrender='$(RET=$?; if [ $RET != 0 ] ; then echo "\[\033[38;5;88m\][$RET] "; fi )'
+export PS1=\
+"${terminaltitle}"\
+"${timerrender}"\
+"${errorrender}"\
+'${debian_chroot:+($debian_chroot)}\[\e[38;5;142m\]\u'\
+'\[\e[38;5;242m\]@'\
+'\[\e[38;5;214m\]\h'\
+'\[\e[38;5;242m\]:'\
+'\[\e[38;5;151m\]\w '\
+'\[\e[0m\]\[\e[38;5;234m\]'\
+'\[\e[0m\]\n'\
+'\[\e[38;5;242m\]\$\[\e[0m\] '
 
 # ls -l | less
 lll() {
