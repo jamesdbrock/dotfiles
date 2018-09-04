@@ -23,13 +23,15 @@ function timer_start {
 
 function timer_stop {
   timer_at_prompt=1
-  time_elapsed=$(($SECONDS - $timer))
-  if [ $time_elapsed -gt 3 ]; then
-    timer_show="${time_elapsed}s "
-  else
-    timer_show=""
+  if [ -n "$timer" ]; then
+    time_elapsed=$(($SECONDS - $timer))
+    if [ $time_elapsed -gt 3 ]; then
+      timer_show="${time_elapsed}s "
+    else
+      timer_show=""
+    fi
+    unset timer
   fi
-  unset timer
 }
 
 trap 'timer_start' DEBUG
