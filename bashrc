@@ -1,4 +1,4 @@
-export EDITOR="vim"
+export EDITOR="nvim"
 export LESS="-R --jump-target=.2"
 
 # http://askubuntu.com/questions/339546/how-do-i-see-the-history-of-the-commands-i-have-run-in-tmux

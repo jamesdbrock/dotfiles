@@ -36,7 +36,7 @@ Plugin 'gmarik/Vundle.vim'
 " " Avoid a name conflict with L9
 " Plugin 'user/L9', {'name': 'newL9'}
 
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " Support bundles
 " Plugin 'jgdavey/tslime.vim'
