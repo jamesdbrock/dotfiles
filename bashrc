@@ -61,12 +61,6 @@ lll() {
 }
 
 
-# TODO put these options in .ackrc?
-ack() {
-    ack-grep -k --color --heading --break --pager="less -r" $1 $2 $3 $4 $5 $6 $7 $8 $9
-}
-
-
 # execute a command for each directory below the pwd
 ford() {
     for i in $(find . -maxdepth 1 -mindepth 1 -type d); do cd $i; echo -e "\n\n$i"; $* ; cd ..; done
