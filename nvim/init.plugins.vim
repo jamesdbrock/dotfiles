@@ -36,7 +36,7 @@ Plugin 'gmarik/Vundle.vim'
 " " Avoid a name conflict with L9
 " Plugin 'user/L9', {'name': 'newL9'}
 
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " Support bundles
 " Plugin 'jgdavey/tslime.vim'
@@ -83,6 +83,8 @@ Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :Hdevtools
 Plugin 'tpope/vim-ragtag'
 
 Plugin 'vim-scripts/gnupg.vim' " edit gpg encrypted files
+
+Plugin 'mileszs/ack.vim' " provides :Ack
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -319,3 +321,7 @@ highlight ColorColumn ctermbg=235 guibg=#262626
 
 " gnupg
 let g:GPGExecutable = 'gpg2'
+
+" https://github.com/mileszs/ack.vim
+:nnoremap <F6> :Ack!<CR>
+

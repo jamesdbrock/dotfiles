@@ -239,9 +239,6 @@ set ffs=unix,dos,mac
 " http://vim.wikia.com/wiki/Easier_buffer_switching
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 
-" https://github.com/mileszs/ack.vim
-:nnoremap <F6> :Ack<CR>
-
 " http://stackoverflow.com/questions/2404879/in-vim-how-can-i-have-a-permenant-status-line-showing-me-the-name-of-the-curren
 set laststatus=2
 
