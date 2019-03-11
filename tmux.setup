@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+ln -s $(realpath tmux.conf) $HOME/.tmux.conf

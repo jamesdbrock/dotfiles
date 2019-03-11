@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+ln -s $(realpath gitconfig) $HOME/.gitconfig
