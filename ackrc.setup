@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-ln -s $(realpath ackrc) $HOME/.ackrc
+ln -s ${PWD}/ackrc $HOME/.ackrc
