@@ -5,5 +5,5 @@
 --color
 --heading
 --break
---pager="less -r"
+--pager=less -r
 
