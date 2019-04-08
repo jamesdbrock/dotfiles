@@ -1,7 +1,6 @@
 
 # ln -s dotfiles/ackrc ~/.ackrc
 
---known-types
 --color
 --heading
 --break
