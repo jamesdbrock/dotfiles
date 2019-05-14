@@ -86,6 +86,8 @@ Plugin 'vim-scripts/gnupg.vim' " edit gpg encrypted files
 
 Plugin 'mileszs/ack.vim' " provides :Ack
 
+Plugin 'LnL7/vim-nix' " Nix syntax highlighting
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
