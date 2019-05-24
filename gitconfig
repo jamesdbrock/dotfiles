@@ -1,47 +1,51 @@
 [user]
-	name = James Brock
-	email = jamesbrock@gmail.com
-	signingkey = 891CC1AB11A07C82
+    name = James Brock
+    email = jamesbrock@gmail.com
+    signingkey = 891CC1AB11A07C82
 
 [merge]
-        conflictstyle = diff3
+    conflictstyle = diff3
+
 [push]
-	default = current
+    default = current
+
 [core]
-	editor = /usr/bin/nvim
-	excludesfile = ~/.gitignore_global
-	pager = less -F -X
-        integrationbranch = origin/dev # for alias base
+    editor = /usr/bin/nvim
+    excludesfile = ~/.gitignore_global
+    pager = less -F -X
+    integrationbranch = origin/dev # for alias base
 
-[tag]                                                                                                                   	sort = version:refname
+[tag]                                                                                                                 sort = version:refname
 
-[diff]                                                                                                                  	compactionHeuristic = true
-	algorithm = patience
+[diff]                                                                                                                compactionHeuristic = true
+    algorithm = patience
 
 [interactive]
-	singlekey = true
+    singlekey = true
 
 [alias]
-	logn = log --graph --color --name-status --decorate=full --date-order
+    logn = log --graph --color --name-status --decorate=full --date-order
 
-        # Make this repo indistinguishable from a fresh clone.
-        #
-        # Without checking anything out or changing the working tree,
-        # gently fast-forward all remote tracking branches of origin using:
-        #
-        #     git fetch origin branch:branch
-        #
-        reclone = "!git fetch origin; bash -c 'for b in $(git branch-tracking);do git fetch --verbose origin $b:$b;done'"
+    # Make this repo indistinguishable from a fresh clone.
+    #
+    # Without checking anything out or changing the working tree,
+    # gently fast-forward all remote tracking branches of origin using:
+    #
+    #     git fetch origin branch:branch
+    #
+    reclone = "!git fetch origin; bash -c 'for b in $(git branch-tracking);do git fetch --verbose origin $b:$b;done'"
 
-        # List all remote tracking branches for remote 'origin'.
-        branch-tracking = "!bash -c 'comm -12 <(ls $(git rev-parse --git-dir)/refs/heads/) <(ls $(git rev-parse --git-dir)/refs/remotes/origin/)'"
+    # List all remote tracking branches for remote 'origin'.
+    branch-tracking = "!bash -c 'comm -12 <(ls $(git rev-parse --git-dir)/refs/heads/) <(ls $(git rev-parse --git-dir)/refs/remotes/origin/)'"
 
-        # from putty:/home/asayers/.dotfiles/git/.gitconfig
-        base = !"f() { git name-rev --tags --name-only --always --no-undefined $(git merge-base $(git config core.integrationBranch) ${1:-HEAD}); }; f"
+    # from putty:/home/asayers/.dotfiles/git/.gitconfig
+    base = !"f() { git name-rev --tags --name-only --always --no-undefined $(git merge-base $(git config core.integrationBranch) ${1:-HEAD}); }; f"
 
-        # reset-checkout. If safe to do so, checkout the current branch which was force-pushed at the origin.
-        recheckout = "!THISBRANCH=$(git symbolic-ref --short HEAD);git checkout -B ${THISBRANCH} origin/${THISBRANCH}"
+    # reset-checkout. If safe to do so, checkout the current branch which was force-pushed at the origin.
+    recheckout = "!THISBRANCH=$(git symbolic-ref --short HEAD);git checkout -B ${THISBRANCH} origin/${THISBRANCH}"
+
 [gpg]
-	program = gpg2
+    program = gpg2
+
 [status]
-	submoduleSummary = true
+    submoduleSummary = true
