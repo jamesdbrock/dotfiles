@@ -44,6 +44,9 @@
     # reset-checkout. If safe to do so, checkout the current branch which was force-pushed at the origin.
     recheckout = "!THISBRANCH=$(git symbolic-ref --short HEAD);git checkout -B ${THISBRANCH} origin/${THISBRANCH}"
 
+    # pull and rebase branch and reapply all unstaged changes
+    up = pull --rebase --autostash
+
 [gpg]
     program = gpg2
 
