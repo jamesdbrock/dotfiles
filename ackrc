@@ -5,4 +5,6 @@
 --heading
 --break
 --pager=less -r
+--ignore-dir=.git
+--ignore-dir=.stack-work
 
