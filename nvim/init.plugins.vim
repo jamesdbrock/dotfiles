@@ -1,6 +1,3 @@
-" " https://github.com/tpope/vim-pathogen
-" execute pathogen#infect()
-
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
@@ -9,99 +6,66 @@
 
 " https://github.com/begriffs/haskell-vim-now
 
-" https://github.com/gmarik/Vundle.vim#about
-" set the runtime path to include Vundle and initialize
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" " The following are examples of different formats supported.
-" " Keep Plugin commands between vundle#begin/end.
-" " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" " plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" " Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" " git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" " The sparkup vim script is in a subdirectory of this repo called vim.
-" " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" " Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
+" https://github.com/junegunn/vim-plug
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Plugin 'Valloric/YouCompleteMe'
 
 " Support bundles
 " Plugin 'jgdavey/tslime.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/syntastic'
+Plug 'Shougo/vimproc.vim'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/syntastic'
 " Plugin 'moll/vim-bbye'
 " Plugin 'nathanaelkane/vim-indent-guides'
 " Plugin 'vim-scripts/gitignore'
 
 " Colorscheme
-Plugin 'vim-scripts/wombat256.vim'
+Plug 'vim-scripts/wombat256.vim'
 
 " Bars, panels, and files
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 " Plugin 'majutsushi/tagbar' " causes vim to background on startup when set shell=bash bashrc.vim-hdevtools
 
 " Text manipulation
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'int3/vim-extradite'
-Plugin 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'int3/vim-extradite'
+Plug 'airblade/vim-gitgutter'
 
 " Haskell
 " Plugin 'neovimhaskell/haskell-vim'
 " Plugin 'enomsg/vim-haskellConcealPlus'
-Plugin 'eagletmt/ghcmod-vim'
+Plug 'eagletmt/ghcmod-vim'
 " Plugin 'eagletmt/neco-ghc' " A completion plugin for Haskell, using ghc-mod
 " Plugin 'Twinside/vim-hoogle'
 
-Plugin 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
+Plug 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
 
 " HTML
 " Plugin 'alvan/vim-closetag'
-Plugin 'tpope/vim-ragtag'
+Plug 'tpope/vim-ragtag'
 
-Plugin 'vim-scripts/gnupg.vim' " edit gpg encrypted files
+Plug 'vim-scripts/gnupg.vim' " edit gpg encrypted files
 
-Plugin 'mileszs/ack.vim' " provides :Ack
+Plug 'mileszs/ack.vim' " provides :Ack
 
-Plugin 'LnL7/vim-nix' " Nix syntax highlighting
+Plug 'LnL7/vim-nix' " Nix syntax highlighting
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Initialize plugin system
+call plug#end()
 
 " for HdevtoolsType 2-line results
 set cmdheight=2
