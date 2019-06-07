@@ -16,7 +16,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Support bundles
 " Plugin 'jgdavey/tslime.vim'
-Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'ervandew/supertab'
 Plug 'scrooloose/syntastic'
 " Plugin 'moll/vim-bbye'
