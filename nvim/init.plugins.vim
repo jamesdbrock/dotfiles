@@ -46,12 +46,6 @@ Plug 'int3/vim-extradite'
 Plug 'airblade/vim-gitgutter'
 
 " Haskell
-" Plugin 'neovimhaskell/haskell-vim'
-" Plugin 'enomsg/vim-haskellConcealPlus'
-Plug 'eagletmt/ghcmod-vim'
-" Plugin 'eagletmt/neco-ghc' " A completion plugin for Haskell, using ghc-mod
-" Plugin 'Twinside/vim-hoogle'
-
 Plug 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
 
 " HTML
