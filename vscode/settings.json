@@ -22,7 +22,7 @@
     },
     {
       "before": [";"],
-      "commands": [":"]
+      "after": [":"]
     }
   ],
   "vim.leader": "<space>",
