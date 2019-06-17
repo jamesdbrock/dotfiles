@@ -47,6 +47,15 @@
     # pull and rebase branch and reapply all unstaged changes
     up = pull --rebase --autostash
 
+    # list branches with date of last commit
+    # https://stackoverflow.com/questions/9236219/git-list-git-branches-sort-by-and-show-date/16961359#16961359
+    # 
+    # This command is similar, but unsorted:
+    #
+    #   git branch --list --format "%(committerdate:short) %(refname:short)" --no-merged
+    #
+    branches = !" f() { echo UNMERGED; git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)' --no-merged; echo MERGED; git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)' --merged; }; f"
+
 [gpg]
     program = gpg2
 
