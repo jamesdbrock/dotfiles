@@ -1,0 +1,90 @@
+http://blog.mired.org/2015/08/unicode-input-with-x11.html
+
+https://wiki.haskell.org/Unicode-symbols
+
+https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#unicode-syntax
+
+https://en.wikipedia.org/wiki/Compose_key#Common_compose_combinations
+
+# Get system defaults. Might be useful things there as well.
+include "%L"
+
+# Note: There are a few cases where a two-character sequence is a
+# prefix of a three-character sequence. The two-character sequence
+# gets a <space> suffix to disambiguate them.
+
+# Logical operators for programming languages that support them.
+<Multi_key> <equal> <equal>               : "≡" U2261 # IDENTICAL TO
+<Multi_key> <equal> <slash>               : "≢" U2262 # NOT IDENTICAL TO
+<Multi_key> <equal> <U00AC>               : "≢" U2262 # NOT IDENTICAL TO
+<Multi_key> <equal> <exclam>              : "≢" U2262 # NOT IDENTICAL TO
+<Multi_key> <equal> <asciitilde>          : "≢" U2262 # NOT IDENTICAL TO
+<Multi_key> <slash> <equal>               : "≠" U2260 # NOT EQUAL TO
+<Multi_key> <U00AC> <equal>               : "≠" U2260 # NOT EQUAL TO
+<Multi_key> <exclam> <equal>              : "≠" U2260 # NOT EQUAL TO
+<Multi_key> <asciitilde> <equal>          : "≠" U2260 # NOT EQUAL TO
+<Multi_key> <ampersand> <ampersand>       : "∧" U2227 # LOGICAL AND
+<Multi_key> <bar> <bar> <space>           : "∨" U2228 # LOGICAL OR
+<Multi_key> <less> <equal>                : "≤" U2264 # LESS-THAN OR EQUAL TO
+<Multi_key> <greater> <equal>             : "≥" U2265 # GREATER-THAN OR EQUAL TO
+<Multi_key> <slash> <less>                : "≮" U226E # NOT LESS-THAN
+<Multi_key> <U00AC> <less>                : "≮" U226E # NOT LESS-THAN
+<Multi_key> <exclam> <less>               : "≮" U226E # NOT LESS-THAN
+<Multi_key> <asciitilde> <less>           : "≮" U226E # NOT LESS-THAN
+<Multi_key> <slash> <greater>             : "≯" U226F # NOT GREATER-THAN
+<Multi_key> <U00AC> <greater>             : "≯" U226F # NOT GREATER-THAN
+<Multi_key> <exclam> <greater>            : "≯" U226F # NOT GREATER-THAN
+<Multi_key> <asciitilde> <greater>        : "≯" U226F # NOT GREATER-THAN
+<Multi_key> <greater> <greater> <space>   : "≫" U226B # MUCH GREATER-THAN
+<Multi_key> <less> <less> <space>         : "≪" U226A # MUCH LESS-THAN
+<Multi_key> <less> <less> <less>          : "⋘" U22D8 # VERY MUCH LESS-THAN
+<Multi_key> <greater> <greater> <greater> : "⋙" U22D9 # VERY MUCH GREATER-THAN
+
+# Symbols for set theory, using mode-shifted multikey goodies
+<Multi_key> <slash> <U2208>               : "∉" U2209 # NOT AN ELEMENT OF
+<Multi_key> <U00AC> <U2208>               : "∉" U2209 # NOT AN ELEMENT OF
+<Multi_key> <exclam> <U2208>              : "∉" U2209 # NOT AN ELEMENT OF
+<Multi_key> <asciitilde> <U2208>          : "∉" U2209 # NOT AN ELEMENT OF
+<Multi_key> <slash> <U220B>               : "∌" U220C # DOES NOT CONTAIN AS MEMBER
+<Multi_key> <U00AC> <U220B>               : "∌" U220C # DOES NOT CONTAIN AS MEMBER
+<Multi_key> <exclam> <U220B>              : "∌" U220C # DOES NOT CONTAIN AS MEMBER
+<Multi_key> <asciitilde> <U220B>          : "∌" U220C # DOES NOT CONTAIN AS MEMBER
+<Multi_key> <U2282> <equal>               : "⊆" U2286 # SUBSET OF OR EQUAL TO
+<Multi_key> <U2283> <equal>               : "⊇" U2287 # SUPERSET OF OR EQUAL TO
+<Multi_key> <slash> <U2282> <space>       : "⊄" U2284 # NOT A SUBSET OF
+<Multi_key> <U00AC> <U2282> <space>       : "⊄" U2284 # NOT A SUBSET OF
+<Multi_key> <exclaim> <U2282> <space>     : "⊄" U2284 # NOT A SUBSET OF
+<Multi_key> <asciitilde> <U2282> <space>  : "⊄" U2284 # NOT A SUBSET OF
+<Multi_key> <slash> <U2283> <space>       : "⊅" U2285 # NOT A SUPERSET OF
+<Multi_key> <U00AC> <U2283> <space>       : "⊅" U2285 # NOT A SUPERSET OF
+<Multi_key> <exclaim> <U2283> <space>     : "⊅" U2285 # NOT A SUPERSET OF
+<Multi_key> <asciitilde> <U2283> <space>  : "⊅" U2285 # NOT A SUPERSET OF
+<Multi_key> <slash> <U2282> <equal>       : "⊈" U2288 # NEITHER A SUBSET OF NOR EQUAL TO
+<Multi_key> <U00AC> <U2282> <equal>       : "⊈" U2288 # NEITHER A SUBSET OF NOR EQUAL TO
+<Multi_key> <exclam> <U2282> <equal>      : "⊈" U2288 # NEITHER A SUBSET OF NOR EQUAL TO
+<Multi_key> <asciitilde> <U2282> <equal>  : "⊈" U2288 # NEITHER A SUBSET OF NOR EQUAL TO
+<Multi_key> <slash> <U2283> <equal>       : "⊉" U2289 # NEITHER A SUPERSET OF NOR EQUAL TO
+<Multi_key> <U00AC> <U2283> <equal>       : "⊉" U2289 # NEITHER A SUPERSET OF NOR EQUAL TO
+<Multi_key> <exclam> <U2283> <equal>      : "⊉" U2289 # NEITHER A SUPERSET OF NOR EQUAL TO
+<Multi_key> <asciitilde> <U2283> <equal>  : "⊉" U2289 # NEITHER A SUPERSET OF NOR EQUAL TO
+
+# More symbols.
+<Multi_key> <braceleft> <braceright>      : "∅" U2205 # EMPTY SET
+<Multi_key> <slash> <slash>               : "∖" U2216 # SET MINUS
+<Multi_key> <less> <minus> <space>        : "←" U2190 # LEFTWARDS ARROW
+<Multi_key> <minus> <greater>             : "→" U2192 # RIGHTWARDS ARROW
+<Multi_key> <minus> <less>                : "⤙" U2919 # LEFTWARDS ARROW-TAIL
+<Multi_key> <greater> <minus>             : "⤚" U291A # RIGHTWARDS ARROW-TAIL
+<Multi_key> <equal> <less>                : "⇐" U21D0 # LEFTWARDS DOUBLE ARROW
+<Multi_key> <equal> <greater>             : "⇒" U21D2 # RIGHTWARDS DOUBLE ARROW
+<Multi_key> <colon> <colon>               : "∷" U2237 # PROPORTION
+<Multi_key> <plus> <plus> <space>         : "⧺" U29FA # DOUBLE PLUS
+<Multi_key> <less> <bar>                  : "⊲" U22B2 # NORMAL SUBGROUP OF
+<Multi_key> <bar> <greater>               : "⊳" U22B3 # CONTAINS AS NORMAL SUBGROUP
+<Multi_key> <greater> <less>              : "⋈" U22C8 # BOWTIE
+<Multi_key> <less> <asterisk> <greater>   : "⊛" U229B # CIRCLED ASTERISK OPERATOR
+<Multi_key> <less> <plus> <greater>       : "⊕" U2295 # CIRCLED PLUS
+<Multi_key> <less> <minus> <greater>      : "⊖" U2296 # CIRCLED MINUS
+<Multi_key> <asterisk> <asterisk> <asterisk> : "⁂" U2040 # ASTERISM
+<Multi_key> <plus> <plus> <plus>          : "⧻" U29FB # TRIPLE PLUS
+<Multi_key> <bar> <bar> <bar>             : "⧻" U2AF4 # TRIPLE VERTICAL BAR BINARY RELATIONSHIP
