@@ -2,30 +2,3 @@
 :set prompt  "λ> "
 :set prompt2 "   > "
 :set editor vim
---- :set -Wall
---- :set -XOverloadedStrings
---- :set -XFlexibleContexts
-
---- :m +Data.Function
---- :m +Data.List
---- :m +Data.List.Split
---- :m +Data.Maybe
---- :m +Data.Char
---- :m +Data.Ratio
---- :m +Data.Traversable
---- :m +Control.Applicative
---- :m +Control.Monad
---- :m +Control.Lens
---- :m +Safe
-
-
---- let charsSup = "⁰¹²³⁴⁵⁶⁷⁸⁹"
---- let charsSub = "₀₁₂₃₄₅₆₇₈₉"
-
---- let { charSup :: Char -> Char; charSup '0' = '⁰'; charSup '1' = '¹'; charSup '2' = '²'; charSup '3' = '³'; charSup '4' = '⁴'; charSup '5' = '⁵'; charSup '6' = '⁶'; charSup '7' = '⁷'; charSup '8' = '⁸'; charSup '9' = '⁹'; charSup x = x }
---- let { charSub :: Char -> Char; charSub '0' = '₀'; charSub '1' = '₁'; charSub '2' = '₂'; charSub '3' = '₃'; charSub '4' = '₄'; charSub '5' = '₅'; charSub '6' = '₆'; charSub '7' = '₇'; charSub '8' = '₈'; charSub '9' = '₉'; charSub x = x }
---- let { showRatio :: Rational -> String; showRatio r = (charSup <$> show (numerator r)) ++ "/" ++ (charSub <$> show (denominator r)) }
----
---- let { showDouble :: Double -> String; showDouble x = let (n,d) = (numerator $ toRational x, denominator $ toRational x) in let (q,r) = quotRem n d in show q ++ " + " ++ show r ++ "/" ++ show d }
----
---- let { hunum :: RealFrac a => a -> String; hunum x = let (xl, xr) = properFraction x in let xrp = approxRational xr (x/2000) in if numerator xrp /= 0 then show xl ++ showRatio (abs xrp) else show xl }
