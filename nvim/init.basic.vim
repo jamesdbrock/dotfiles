@@ -296,6 +296,9 @@ endfunc
 augroup whitespace
   autocmd!
   autocmd BufWrite *.hs :call DeleteTrailingWS()
+  autocmd BufWrite *.ts :call DeleteTrailingWS()
+  autocmd BufWrite *.tsx :call DeleteTrailingWS()
+  autocmd BufWrite *.purs :call DeleteTrailingWS()
 augroup END
 
 
@@ -331,3 +334,10 @@ try
   colorscheme murphy
 catch
 endtry
+
+" Treat TypeScript React files as normal TypeScript files for the purpose
+" of syntax highlighting.
+augroup typescripthighlight
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+augroup END

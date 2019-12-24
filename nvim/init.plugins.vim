@@ -56,7 +56,11 @@ Plug 'vim-scripts/gnupg.vim' " edit gpg encrypted files
 
 Plug 'mileszs/ack.vim' " provides :Ack
 
+" Nix
 Plug 'LnL7/vim-nix' " Nix syntax highlighting
+
+" Purescript
+Plug 'purescript-contrib/purescript-vim' " Purescript syntax highlighting
 
 " Initialize plugin system
 call plug#end()
