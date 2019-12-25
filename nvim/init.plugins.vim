@@ -95,7 +95,8 @@ hi Directory guifg=#8ac6f2
 nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>
 augroup haskell
   autocmd!
-  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>:SyntasticReset<cr>:GhcModTypeClear<cr>:HdevtoolsClear<cr>
+"  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>:SyntasticReset<cr>:GhcModTypeClear<cr>:HdevtoolsClear<cr>
+  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>:SyntasticReset<cr>:HdevtoolsClear<cr>
 "  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 
