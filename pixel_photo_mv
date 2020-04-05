@@ -1,0 +1,3 @@
+rsync --remove-source-files --partial --inplace --times --progress --verbose \
+/run/user/1000/gvfs/mtp:host=Google_Pixel_4_XL_99181FFBA001ZY/'Internal shared storage'/DCIM/Camera/* \
+/mnt/share/Brock/Pictures/$(date '+%Y-%m')/
