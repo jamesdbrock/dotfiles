@@ -1,3 +1,15 @@
-rsync --remove-source-files --partial --inplace --times --progress --verbose \
-/run/user/1000/gvfs/mtp:host=Google_Pixel_4_XL_99181FFBA001ZY/'Internal shared storage'/DCIM/Camera/* \
-/mnt/share/Brock/Pictures/$(date '+%Y-%m')/
+#!/bin/bash
+set -euo pipefail
+
+SOURCE=/run/user/1000/gvfs/mtp:host=Google_Pixel_4_XL_99181FFBA001ZY/'Internal shared storage'/DCIM/Camera/
+TARGET="/mnt/share/Brock/Pictures/$(date '+%Y-%m-%d')/"
+
+rsync --dry-run --remove-source-files --partial --inplace --times --progress --verbose --recursive "${SOURCE}" "${TARGET}"
+
+# delete empty directories from SOURCE, which rsync doesn't do
+# https://superuser.com/questions/676671/rsync-does-not-delete-source-directories
+find "${SOURCE}" -depth -type d -empty -delete
+
+# set targets read-only by everyone
+find "${TARGET}" -depth -type f -exec chmod ugo-w '{}' \;
+find "${TARGET}" -depth -type f -exec chmod ugo+r '{}' \;
