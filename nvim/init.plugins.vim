@@ -208,7 +208,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_haskell_checkers = ['ghc_mod', 'hdevtools', 'hlint']
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
-let g:hdevtools_stack = 1
+" let g:hdevtools_stack = 0
 " let g:hdevtools_cabal_sandbox = 1
 let g:hdevtools_options = '-g-Wall -g-fdefer-type-errors'
 let g:syntastic_haskell_hdevtools_args = g:hdevtools_options
