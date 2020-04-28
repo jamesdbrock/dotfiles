@@ -67,6 +67,9 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
+" https://github.com/Yggdroot/indentLine
+Plug 'Yggdroot/indentLine'
+
 " Initialize plugin system
 call plug#end()
 
