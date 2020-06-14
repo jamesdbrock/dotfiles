@@ -300,7 +300,11 @@ let g:GPGExecutable = 'gpg2'
 
 " https://github.com/digital-asset/ghcide#using-with-vimneovim
 " https://github.com/cachix/ghcide-nix
-let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
+let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml', 'hie.yaml']
 let g:LanguageClient_serverCommands = {
     \ 'haskell': ['ghcide', '--lsp'],
     \ }
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
