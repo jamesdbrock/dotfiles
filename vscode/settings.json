@@ -38,6 +38,7 @@
   "vim.statusBarColors.visualblock": "#505050",
   "vim.statusBarColors.replace": "#505050",
 
+  "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "[haskell]": {},
   "languageServerHaskell.trace.server": "verbose",
@@ -45,5 +46,8 @@
     "statusBar.background": "#505050",
     "statusBar.noFolderBackground": "#505050",
     "statusBar.debuggingBackground": "#505050"
-  }
+  },
+  "editor.tabSize": 2,
+  "editor.rulers": [80,100,120],
+  "files.trimTrailingWhitespace": true
 }
