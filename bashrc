@@ -26,7 +26,7 @@ function timer_stop {
   if [ -n "$timer" ]; then
     time_elapsed=$(($SECONDS - $timer))
     if [ $time_elapsed -gt 3 ]; then
-      timer_show="${time_elapsed}s "
+      timer_show="${time_elapsed}s\n"
     else
       timer_show=""
     fi
@@ -41,11 +41,12 @@ export PROMPT_COMMAND="timer_stop; $PROMPT_COMMAND"
 
 terminaltitle='\[\e[48;5;234m\]\[\e]0;\u  \h  ${PWD}\a\]'
 timerrender='\[\033[38;5;240m\]${timer_show}'
-errorrender='$(RET=$?; if [ $RET != 0 ] ; then echo "\[\033[38;5;88m\][$RET] "; fi )'
+errorrender='$(RET=$?; if [ $RET != 0 ] ; then echo -e "\[\033[38;5;88m\][$RET]\n"; fi )'
 export PS1=\
 "${terminaltitle}"\
 "${timerrender}"\
 "${errorrender}"\
+"\[\e[38;5;242m\]╭─"\
 '${debian_chroot:+($debian_chroot)}\[\e[38;5;142m\]\u'\
 '\[\e[38;5;242m\]@'\
 '\[\e[38;5;214m\]\h'\
@@ -53,7 +54,8 @@ export PS1=\
 '\[\e[38;5;151m\]\w '\
 '\[\e[0m\]\[\e[38;5;234m\]'\
 '\[\e[0m\]\n'\
-'\[\e[38;5;242m\]\$\[\e[0m\] '
+'\[\e[38;5;242m\]╰─\$\[\e[0m\] '
+
 
 # ls -l | less
 lll() {

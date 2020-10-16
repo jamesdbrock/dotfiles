@@ -49,5 +49,14 @@
   },
   "editor.tabSize": 2,
   "editor.rulers": [80,100,120],
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "window.zoomLevel": 0,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSurroundingLines": 3,
+  "files.watcherExclude": {
+    "**/.psc-package/**": true,
+    "**/.spago/**": true,
+    "**/output/**": true
+  }
 }

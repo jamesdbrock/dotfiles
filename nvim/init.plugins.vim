@@ -68,7 +68,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 
 " https://github.com/Yggdroot/indentLine
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'  " https://stackoverflow.com/questions/40601818/vim-displays-json-file-without-any-quotes
 
 " Initialize plugin system
 call plug#end()
