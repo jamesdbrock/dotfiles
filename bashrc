@@ -13,40 +13,39 @@ shopt -s histappend
 # https://github.com/jichu4n/bash-command-timer/blob/master/bash_command_timer.sh
 # https://seasonofcode.com/posts/debug-trap-and-prompt_command-in-bash.html
 
-function timer_start {
-  if [ -n "$timer_at_prompt" ]; then
-    unset timer_at_prompt
-    return
-  fi
-  timer=${timer:-$SECONDS}
-}
+# function timer_start {
+#   if [ -n "$timer_at_prompt" ]; then
+#     unset timer_at_prompt
+#     return
+#   fi
+#   timer=${timer:-$SECONDS}
+# }
+# 
+# function timer_stop {
+#   timer_at_prompt=1
+#   if [ -n "$timer" ]; then
+#     time_elapsed=$(($SECONDS - $timer))
+#     if [ $time_elapsed -gt 3 ]; then
+#       timer_show="${time_elapsed}s\n"
+#     else
+#       timer_show=""
+#     fi
+#     unset timer
+#   fi
+# }
 
-function timer_stop {
-  timer_at_prompt=1
-  if [ -n "$timer" ]; then
-    time_elapsed=$(($SECONDS - $timer))
-    if [ $time_elapsed -gt 3 ]; then
-      timer_show="${time_elapsed}s\n"
-    else
-      timer_show=""
-    fi
-    unset timer
-  fi
-}
-
-trap 'timer_start' DEBUG
-export PROMPT_COMMAND="timer_stop; $PROMPT_COMMAND"
+# trap 'timer_start' DEBUG
+# export PROMPT_COMMAND="timer_stop; $PROMPT_COMMAND"
 
 # http://unix.stackexchange.com/questions/14113/is-it-possible-to-set-gnome-terminals-title-to-userhost-for-whatever-host-i
 
+# why isn't errorrender working?
 terminaltitle='\[\e[48;5;234m\]\[\e]0;\u  \h  ${PWD}\a\]'
-timerrender='\[\033[38;5;240m\]${timer_show}'
+# timerrender='\[\033[38;5;240m\]${timer_show}'
 errorrender='$(RET=$?; if [ $RET != 0 ] ; then echo -e "\[\033[38;5;88m\][$RET]\n"; fi )'
 export PS1=\
 "${terminaltitle}"\
-"${timerrender}"\
 "${errorrender}"\
-"\[\e[38;5;242m\]╭─"\
 '${debian_chroot:+($debian_chroot)}\[\e[38;5;142m\]\u'\
 '\[\e[38;5;242m\]@'\
 '\[\e[38;5;214m\]\h'\
@@ -54,7 +53,7 @@ export PS1=\
 '\[\e[38;5;151m\]\w '\
 '\[\e[0m\]\[\e[38;5;234m\]'\
 '\[\e[0m\]\n'\
-'\[\e[38;5;242m\]╰─\$\[\e[0m\] '
+'\$\[\e[0m\] '
 
 
 # ls -l | less
@@ -63,17 +62,19 @@ lll() {
 }
 
 
-# execute a command for each directory below the pwd
-ford() {
-    for i in $(find . -maxdepth 1 -mindepth 1 -type d); do cd $i; echo -e "\n\n$i"; $* ; cd ..; done
-}
+# # execute a command for each directory below the pwd
+# ford() {
+#     for i in $(find . -maxdepth 1 -mindepth 1 -type d); do cd $i; echo -e "\n\n$i"; $* ; cd ..; done
+# }
 
 # disable terminal freeze Ctrl-s
 stty -ixon
 
+export LANG=C.UTF-8
+export LANGUAGE=C.UTF-8
 # https://michael.stapelberg.de/Artikel/locales
-export LANG=en_US.utf8
-export LANGUAGE=en_US:en
+# export LANG=en_US.utf8
+# export LANGUAGE=en_US:en
 # export LC_CTYPE=en_US.utf8
 # export LC_NUMERIC=en_US.utf8
 # export LC_TIME=ja_JP.utf8
