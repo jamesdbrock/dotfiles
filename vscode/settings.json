@@ -38,7 +38,7 @@
   "vim.statusBarColors.visualblock": "#505050",
   "vim.statusBarColors.replace": "#505050",
 
-  "editor.fontSize": 16,
+  // "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "[haskell]": {},
   "languageServerHaskell.trace.server": "verbose",
@@ -47,7 +47,7 @@
     "statusBar.noFolderBackground": "#505050",
     "statusBar.debuggingBackground": "#505050"
   },
-  "editor.tabSize": 8,
+  "editor.tabSize": 2,
   "editor.rulers": [80,100,120],
   "files.trimTrailingWhitespace": true,
   "editor.cursorBlinking": "solid",
@@ -63,7 +63,6 @@
   "workbench.editor.wrapTabs": true,
   "window.titleBarStyle": "custom",
   "editor.cursorStyle": "line",
-  "editor.insertSpaces": false,
   "editor.lineNumbers": "on",
   "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
   "editor.wordWrap": "off",
@@ -71,5 +70,6 @@
     "*.ipynb": "jupyter.notebook.ipynb"
   },
   "jupyter.askForKernelRestart": false,
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "editor.insertSpaces": false
 }
