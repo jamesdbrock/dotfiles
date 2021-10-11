@@ -70,8 +70,8 @@ lll() {
 # disable terminal freeze Ctrl-s
 stty -ixon
 
-export LANG=C.UTF-8
-export LANGUAGE=C.UTF-8
+# export LANG=C.UTF-8
+# export LANGUAGE=C.UTF-8
 # https://michael.stapelberg.de/Artikel/locales
 # export LANG=en_US.utf8
 # export LANGUAGE=en_US:en
