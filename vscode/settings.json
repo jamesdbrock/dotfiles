@@ -58,7 +58,6 @@
     "**/.spago/**": true,
     "**/output/**": true
   },
-  "editor.minimap.enabled": false,
   "ruby.intellisense": "rubyLocate",
   "workbench.editor.wrapTabs": true,
   "window.titleBarStyle": "custom",
