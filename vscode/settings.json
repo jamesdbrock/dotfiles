@@ -51,7 +51,7 @@
   "editor.rulers": [80,100,120],
   "files.trimTrailingWhitespace": true,
   "editor.cursorBlinking": "solid",
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 3,
   "files.watcherExclude": {
     "**/.psc-package/**": true,
@@ -69,6 +69,9 @@
     "*.ipynb": "jupyter.notebook.ipynb"
   },
   "jupyter.askForKernelRestart": false,
-  "window.zoomLevel": 1,
-  "editor.insertSpaces": false
+  "editor.insertSpaces": false,
+  "haskell.manageHLS": "PATH",
+  "[python]": {
+    "editor.formatOnType": true
+  }
 }

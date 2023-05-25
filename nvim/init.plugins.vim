@@ -45,9 +45,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'int3/vim-extradite'
 Plug 'airblade/vim-gitgutter'
 
-" Haskell
-Plug 'bitc/vim-hdevtools' " provides :HdevtoolsClear :HdevtoolsType :HdevtoolsInfo
-
 " HTML
 " Plugin 'alvan/vim-closetag'
 Plug 'tpope/vim-ragtag'
@@ -73,15 +70,8 @@ Plug 'autozimu/LanguageClient-neovim', {
 " Initialize plugin system
 call plug#end()
 
-" for HdevtoolsType 2-line results
-set cmdheight=2
-
 " Find custom built ghc-mod, codex etc
 let $PATH = $PATH . ':' . expand("~/.local/bin")
-
-" for Shift-K
-" set keywordprg=pophoogle
-autocmd FileType haskell setlocal keywordprg=pophoogle
 
 try
   colorscheme wombat256mod
@@ -101,12 +91,6 @@ hi Directory guifg=#8ac6f2
 " but preserve cursor coloring
 " nnoremap <leader><cr> :noh\|hi Cursor guibg=red<cr>
 nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>
-augroup haskell
-  autocmd!
-"  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>:SyntasticReset<cr>:GhcModTypeClear<cr>:HdevtoolsClear<cr>
-  autocmd FileType haskell nnoremap <leader><cr> :noh<cr>:NERDTreeClose<cr>:SyntasticReset<cr>:HdevtoolsClear<cr>
-"  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
 
 
 " NERDTree
@@ -208,42 +192,13 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_haskell_checkers = ['ghc_mod', 'hdevtools', 'hlint']
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
-" let g:hdevtools_stack = 0
-" let g:hdevtools_cabal_sandbox = 1
-let g:hdevtools_options = '-g-Wall -g-fdefer-type-errors'
-let g:syntastic_haskell_hdevtools_args = g:hdevtools_options
 
 nnoremap <leader>sm :SyntasticToggleMode<CR>
 nnoremap <leader>sl :SyntasticCheck hlint<CR>
 nnoremap <leader>sc :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
-
-" http://www.stephendiehl.com/posts/vim_haskell.html
-" au FileType haskell nnoremap <buffer> <F2> :HdevtoolsType<CR>
-" au FileType haskell nnoremap <buffer> <F3> :HdevtoolsClear<CR>
-" au FileType haskell nnoremap <buffer> <F4> :HdevtoolsInfo<CR>
-au FileType haskell nnoremap <buffer> t :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> T :HdevtoolsInfo<CR>
-
-
-" Show types in completion suggestions
-" let g:necoghc_enable_detailed_browse = 1
-
-" Type of expression under cursor
-nnoremap <silent> <leader>ht :GhcModType<CR>
-" Insert type of expression under cursor
-nnoremap <silent> <leader>hT :GhcModTypeInsert<CR>
-" GHC errors and warnings
-nnoremap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
-
-" Shift-plus go to next error
-nnoremap + :lnext<cr>
-" Shift-minus go to previous error
-nnoremap _ :lprev<cr>
-
 
 
 " Git
